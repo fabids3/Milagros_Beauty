@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Super Admin - Milagro's Beauty</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Panel<span>SuperAdmin 👑</span></h1>
+            <a href="/" class="btn">Ver Tienda</a>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 30px;">
+        
+        <section class="super-panel">
+            <h2>Gestión de la Tienda </h2>
+            <p>Desde aquí podrás agregar moderadores y cambiar la configuración de la página.</p>
+            
+            <div style="display: flex; gap: 15px; margin-top: 15px;">
+                <button id="btn-mostrar-form-mod" class="btn" style="background-color: #ff9800; color: white;">+ Crear Nuevo Moderador</button>
+                <button id="btn-editar-titulo" class="btn" style="background-color: #4CAF50; color: white;">✏️ Editar Título de Tienda</button>
+            </div>
+
+            <div id="seccion-crear-mod" style="display: none;">
+                <h3 style="color: #ff9800; margin-bottom: 15px;">Registrar Nuevo Moderador</h3>
+                <form id="form-nuevo-moderador" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <input type="text" id="mod-nombre" placeholder="Nombre" required>
+                    <input type="text" id="mod-apellido" placeholder="Apellido" required>
+                    <input type="text" id="mod-telefono" placeholder="Teléfono" required>
+                    <input type="email" id="mod-correo" placeholder="Correo Electrónico" required>
+                    <input type="password" id="mod-password" placeholder="Contraseña segura" required>
+                    
+                    <button type="submit" class="btn" style="grid-column: span 2; background-color: #e84c7f; color: white;">Guardar Moderador</button>
+                </form>
+            </div>
+        </section>
+
+        <hr style="margin: 40px 0; border: 1px solid #fce4ec;">
+
+
+
+
+        <section class="super-panel" style="margin-top: 20px; padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
+            <h2>🏢 Editar Información de la Empresa</h2>
+            <form id="form-info-empresa" style="display: flex; flex-direction: column; gap: 10px;">
+                <label><strong>Sobre Nosotros:</strong></label>
+                <textarea id="info-sobre" rows="3" style="padding: 10px; border-radius: 5px;"></textarea>
+
+                <label><strong>Misión:</strong></label>
+                <textarea id="info-mision" rows="2" style="padding: 10px; border-radius: 5px;"></textarea>
+
+                <label><strong>Visión:</strong></label>
+                <textarea id="info-vision" rows="2" style="padding: 10px; border-radius: 5px;"></textarea>
+
+                <label><strong>Ubicación de la Tienda Física:</strong></label>
+                <input type="text" id="info-ubicacion" style="padding: 10px; border-radius: 5px;">
+
+                <button type="submit" class="btn" style="background-color: #e84c7f; color: white; margin-top: 10px;">Guardar Información</button>
+            </form>
+        </section>
+
+
+
+
+        
+
+        <section class="super-panel" style="background-color: #f3f4f6; border: 2px solid #ccc;">
+            <h2>📈 Historial de Ventas y Pedidos</h2>
+            <p>Aquí puedes monitorear todas las compras realizadas por tus clientes.</p>
+            
+            <table class="tabla-carrito" style="width: 100%; margin-top: 15px; background: white;">
+                <thead>
+                    <tr>
+                        <th>N° Pedido</th>
+                        <th>Cliente</th>
+                        <th>Fecha y Hora</th>
+                        <th>Total Facturado</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-ventas">
+                    </tbody>
+            </table>
+        </section>
+        
+        <hr style="margin: 40px 0; border: 1px solid #fce4ec;">
+
+
+
+        <section class="admin-form-section">
+            <h2>Gestión de Inventario</h2>
+            <form id="form-admin-producto" class="admin-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <input type="text" id="admin-nombre" placeholder="Nombre del producto" required>
+                    <input type="number" id="admin-precio" placeholder="Precio (sin puntos)" required>
+                    <input type="text" id="admin-contenido" placeholder="Contenido (ej. 450 ml)" required>
+                    <input type="number" id="admin-stock" placeholder="Stock Inicial" required>
+                    <input type="text" id="admin-imagen" placeholder="Ruta: imagenes/nombre.jpg" required>
+                    <select id="admin-categoria" required>
+                        <option value="" disabled selected>Seleccione Categoría</option>
+                        <option value="1">Shampoos</option>
+                        <option value="2">Acondicionadores</option>
+                        <option value="3">Tratamientos</option>
+                        <option value="4">Mascarillas</option>
+                        <option value="5">Serums y Gotas</option>
+                        <option value="6">Perfumes Capilares</option>
+                        <option value="7">Accesorios</option>
+                    </select>
+                </div>
+                <textarea id="admin-desc" placeholder="Descripción general" rows="2" required></textarea>
+                <textarea id="admin-ideal" placeholder="Ideal para..." rows="2" required></textarea>
+                <textarea id="admin-beneficios" placeholder="Beneficios" rows="2" required></textarea>
+                <textarea id="admin-ingredientes" placeholder="Ingredientes" rows="2" required></textarea>
+                <textarea id="admin-uso" placeholder="Modo de uso" rows="2" required></textarea>
+
+                <button type="submit" class="btn" style="width: 100%; margin-top: 15px;">Guardar Producto</button>
+            </form>
+        </section>
+
+
+
+    <section class="super-panel" style="margin-top: 50px; background-color: #fff; border: 2px solid #e84c7f; padding: 20px; border-radius: 8px;">
+        <h2 style="color: #e84c7f;">👥 Clientes Registrados</h2>
+        <p style="margin-bottom: 15px; color: #666;">Lista de personas que han creado una cuenta en la tienda.</p>
+    
+        <table class="tabla-carrito" style="width: 100%;">
+            <thead>
+                <tr style="background-color: #fce4ec;">
+                    <th>ID</th>
+                    <th>Nombre Completo</th>
+                    <th>Correo Electrónico</th>
+                    <th>Teléfono</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-clientes">
+                </tbody>
+        </table>
+    </section>
+
+
+
+
+
+
+
+        <section style="margin-top: 40px;">
+            <h2>Inventario Actual</h2>
+            <table class="tabla-carrito">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-inventario"></tbody>
+            </table>
+        </section>
+
+        
+
+
+
+
+        
+    </main>
+
+
+    <script src="{{ url_for('static', filename='_session_patch.js') }}"></script>
+    <script src="{{ url_for('static', filename='superadmin.js') }}?v=2"></script>
+</body>
+</html>

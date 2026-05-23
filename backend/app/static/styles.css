@@ -1,0 +1,1173 @@
+/* ==== 1. ESTILOS GENERALES ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fff6f9;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 80px; /* Espacio para el footer fijo */
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ==== 2. ENCABEZADO Y NAVEGACIÓN ==== */
+.header {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 0;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  width: 150px;
+  height: auto;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.logo span { color: #e84c7f; }
+
+.nav ul { list-style: none; }
+
+.nav li {
+  display: inline-block;
+  position: relative;
+  margin-left: 15px;
+}
+
+.nav a {
+  color: #555;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+  padding: 10px;
+}
+
+.nav a:hover { color: #e84c7f; }
+
+/* Submenú de Categorías */
+.nav li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  min-width: 180px;
+  padding: 10px 0;
+}
+
+.nav li:hover > ul { display: block; }
+
+.nav li ul li { display: block; margin: 0; }
+
+.nav li ul li a {
+  display: block;
+  padding: 10px 20px;
+}
+
+/* ==== 3. CARRITO (CONTADOR Y LINK) ==== */
+.carrito-link {
+  position: relative; /* Mantiene la burbuja anclada al botón */
+  display: inline-block;
+  background-color: #ffeef3;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid #f3b8cc;
+  color: #e84c7f;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.carrito-link:hover {
+  background-color: #e84c7f;
+  color: #fff !important;
+}
+
+/* BURBUJA ROJA DE NOTIFICACIÓN EDITADA */
+.contador-carrito {
+  position: absolute;
+  top: -10px;    
+  right: -5px;   
+  background-color: #ff0000;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: none; 
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  border: 2px solid white; /* Borde blanco para que resalte sobre el fondo */
+  z-index: 10;
+}
+
+/* ==== 4. SECCIÓN HERO ==== */
+.hero {
+  background: linear-gradient(to right, #ffdde1, #ee9ca7);
+  color: #fff; /*color blanco para las letras principales*/
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h2 { font-size: 2.5rem; margin-bottom: 15px; }
+
+/* ==== 5. PRODUCTOS (GRID) ==== */
+.productos { padding: 60px 0; }
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #222;
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.producto {
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s;
+}
+
+.producto:hover { transform: translateY(-10px); }
+
+.producto img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.precio {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #e84c7f;
+  margin: 10px 0;
+}
+
+.btn-agregar {
+  background: #e84c7f;
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-agregar:hover { background: #d2396d; transform: scale(1.05); }
+
+/* ==== 6. PÁGINA DEL CARRITO (TABLA) ==== */
+.carrito-wrapper {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.tabla-carrito {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.tabla-carrito th {
+  background-color: #fce4ec;
+  color: #e84c7f;
+  padding: 15px;
+  text-align: left;
+}
+
+.tabla-carrito td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.img-carrito-tabla {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.total-pago {
+  text-align: right;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.total-pago span { color: #e84c7f; }
+
+/* ==== 7. MODALES (LOGIN/REGISTRO) ==== */
+#login-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5) !important; /* El color con transparencia es CLAVE */
+    
+    -webkit-backdrop-filter: blur(10px) !important; 
+    backdrop-filter: blur(10px) !important;
+    
+    z-index: 2000 !important;
+}
+
+.login-section {
+  display: none;
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2001;
+  width: 90%;
+  max-width: 450px;
+}
+
+/* Marco animado del modal */
+.login-frame {
+  position: relative;
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  overflow: hidden;
+}
+
+.login-frame::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: conic-gradient(#e84c7f, #ff9ccf, #e84c7f);
+  animation: rotate-border 4s linear infinite;
+  z-index: -1;
+}
+
+.login-frame::after {
+  content: '';
+  position: absolute;
+  top: 4px; left: 4px; right: 4px; bottom: 4px;
+  background: white; border-radius: 16px; z-index: -1;
+}
+
+@keyframes rotate-border {
+  100% { transform: rotate(360deg); }
+}
+
+.login-form input {
+  width: 100%;
+  padding: 12px 20px;
+  margin-bottom: 15px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+}
+
+.login-btn {
+  width: 100%;
+  background: #e84c7f;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ==== 8. PANEL ADMINISTRATIVO ==== */
+.admin-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.admin-form input, .admin-form textarea, .admin-form select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+/* ==== 9. FOOTER ==== */
+.footer {
+  position: fixed;
+  bottom: 0; left: 0; width: 100%;
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+  z-index: 100;
+}
+
+.redes img {
+  width: 24px;
+  margin: 0 10px;
+  filter: invert(1);
+  transition: 0.3s;
+}
+
+.redes img:hover { transform: scale(1.2); }
+
+/* === SECCIÓN NOSOTROS PREMIUM === */
+.nosotros {
+    padding: 80px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.nosotros-card {
+    background: #fff;
+    max-width: 800px;
+    padding: 40px;
+    border-radius: 25px;
+    /* Borde rosado elegante */
+    border: 2px solid #fce4ec;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(232, 76, 127, 0.05);
+    text-align: center;
+}
+
+/* Decoración de borde interno */
+.nosotros-card::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 1px solid #fce4ec;
+    border-radius: 20px;
+    pointer-events: none;
+}
+
+.nosotros-content h2 {
+    color: #e84c7f;
+    margin-bottom: 25px;
+    font-size: 2.2rem;
+}
+
+.nosotros-content p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.nosotros-footer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    color: #e84c7f;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+/* Efecto al pasar el mouse */
+.nosotros-card:hover {
+    transform: scale(1.02);
+    transition: 0.4s ease;
+    border-color: #e84c7f;
+}
+
+
+/* === BOTÓN VACIAR CARRITO ANIMADO === */
+.btn-vaciar-animado {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    color: #b52a56;
+    border: 2px solid #fce4ec;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(255, 154, 158, 0.2);
+}
+
+/* Animación al pasar el mouse (Hover) */
+.btn-vaciar-animado:hover {
+    background: #ff4d4d;
+    color: white;
+    border-color: #ff4d4d;
+    transform: scale(1.08) rotate(-2deg);
+    box-shadow: 0 8px 25px rgba(255, 77, 77, 0.4);
+}
+
+/* Animación de "click" */
+.btn-vaciar-animado:active {
+    transform: scale(0.95);
+}
+
+
+.btn-vaciar-animado i {
+    font-size: 1.1rem;
+}
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-vaciar-animado {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+
+/* Buscador Premium */
+.search-container {
+    flex: 1;
+    margin: 0 40px;
+}
+
+#input-buscador {
+    width: 100%;
+    padding: 10px 25px;
+    border-radius: 30px;
+    border: 2px solid #fce4ec;
+    background: #fff;
+    outline: none;
+    transition: 0.3s;
+    font-size: 0.9rem;
+}
+
+#input-buscador:focus {
+    border-color: #e84c7f;
+    box-shadow: 0 4px 12px rgba(232, 76, 127, 0.1);
+}
+
+
+
+/* --- DISEÑO DEL CARRITO --- */
+.resumen-contenedor {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Todo a la derecha */
+}
+
+.total-pago {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.botones-acciones {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-vaciar-accion {
+    background-color: transparent;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-finalizar-accion {
+    background-color: #d4a373;
+    color: white;
+    border: none;
+    padding: 10px 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Estilo para los productos dentro de la tabla */
+.img-carrito {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+/* Botón normal de agregar */
+.btn-agregar {
+    background-color: #d4a373;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-agregar:hover {
+    background-color: #b08d62;
+}
+
+/* Botón de Agotado */
+.btn-agotado {
+    background-color: #ccc; /* Gris claro */
+    color: #666;            /* Texto gris oscuro */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: not-allowed;    /* Cambia el cursor a "prohibido" */
+    font-weight: bold;
+}
+
+.agotado-texto {
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+
+
+/* ==========================================
+   DISEÑO DEL CARRITO
+   ========================================== */
+
+/* Contenedor principal de la tabla */
+.carrito-wrapper {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.tabla-carrito {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.tabla-carrito th {
+    background-color: #fcf8f3;
+    color: #b08d62;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #eee;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.tabla-carrito td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #f9f9f9;
+    vertical-align: middle;
+}
+
+/* --- BOTONES DE CANTIDAD (+ y -) --- */
+.cantidad-controles {
+    display: flex;
+    align-items: center;
+    background: #f1f1f1;
+    border-radius: 50px;
+    width: fit-content;
+    padding: 5px;
+}
+
+.btn-restar, .btn-sumar {
+    background: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: #d4a373;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-restar:hover, .btn-sumar:hover {
+    background: #d4a373;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* --- BOTÓN ELIMINAR (X) --- */
+.btn-eliminar {
+    background: #fff0f0;
+    color: #ff4d4d;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-eliminar:hover {
+    background: #ff4d4d;
+    color: white;
+    transform: rotate(90deg);
+}
+
+/* --- RECUADRO DE RESUMEN Y BOTONES FINALES --- */
+.resumen-contenedor {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    border-top: 4px solid #d4a373;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.total-pago {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.total-pago span {
+    color: #d4a373;
+    font-weight: 600;
+}
+
+.botones-acciones {
+    display: flex;
+    gap: 20px;
+}
+
+/* --- BOTONES Y ELEMENTOS EN ROSADO --- */
+
+/* Botón Finalizar:*/
+.btn-finalizar-accion {
+    background: linear-gradient(135deg, #ff85a2 0%, #ff6b8e 100%);
+    color: white;
+    border: none;
+    padding: 15px 45px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 107, 142, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-finalizar-accion:hover {
+    background: linear-gradient(135deg, #ff6b8e 0%, #ff4773 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 107, 142, 0.5);
+}
+
+/* Botón Vaciar: Elegante y sutil */
+.btn-vaciar-accion {
+    background: transparent;
+    color: #ff85a2;
+    border: 2px solid #ff85a2;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-vaciar-accion:hover {
+    background: #fff0f3;
+    color: #ff4773;
+    border-color: #ff4773;
+}
+
+/* Detalles de la tabla en Rosado */
+.tabla-carrito th {
+    background-color: #fff0f3; /* Un fondo rosado casi blanco */
+    color: #ff6b8e;
+    padding: 15px;
+    border-bottom: 2px solid #ffccd5;
+}
+
+#total {
+    color: #ff6b8e;
+    font-weight: bold;
+}
+
+/* Cantidad (+) y (-) con toque rosado */
+.btn-restar:hover, .btn-sumar:hover {
+    background: #ff85a2;
+    color: white;
+}
+
+/* ==========================================
+   DISEÑO DE FORMULARIO DE REGISTRO
+   ========================================== */
+
+/* Contenedor del Formulario */
+#register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre cada campo */
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+/* Estilo de los grupos de etiquetas e inputs */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+/* Estilo de los Campos de Texto (Inputs) */
+#register-form input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+    box-sizing: border-box; 
+}
+
+/* Efecto cuando el usuario hace clic en el input */
+#register-form input:focus {
+    outline: none;
+    border-color: #ff85a2; /* Rosado Milagro's */
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(255, 133, 162, 0.2);
+}
+
+
+
+
+/* El Botón de Crear Cuenta */
+#register-form button[type="submit"] {
+    margin-top: 10px;
+    background: linear-gradient(135deg, #ff85a2 0%, #ff6b8e 100%);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 107, 142, 0.3);
+    transition: all 0.3s ease;
+}
+
+#register-form button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 142, 0.4);
+    background: linear-gradient(135deg, #ff6b8e 0%, #ff4773 100%);
+}
+
+/* Estilo para los textos pequeños o enlaces dentro del registro */
+.registro-footer {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.registro-footer a {
+    color: #ff6b8e;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+
+/* ==========================================
+   DISEÑO DE FORMULARIO DE LOGIN
+   ========================================== */
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Campos de entrada */
+#login-form input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+}
+
+#login-form input:focus {
+    outline: none;
+    border-color: #ff85a2;
+    box-shadow: 0 0 8px rgba(255, 133, 162, 0.2);
+    background-color: #fff;
+}
+
+/* Botón de Ingresar */
+#login-form button[type="submit"] {
+    background: linear-gradient(135deg, #ff85a2 0%, #ff6b8e 100%);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 107, 142, 0.3);
+    transition: all 0.3s ease;
+}
+
+#login-form button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 142, 0.5);
+}
+
+/* Botón de Cerrar (La X) */
+.btn-cerrar-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.btn-cerrar-modal:hover {
+    color: #ff6b8e; /* Se pone rosada al pasar el mouse */
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #888;
+    line-height: 1;
+} 
+
+.close-btn:hover {
+    color: #ff6b8e; /* Color rosado al pasar el mouse */
+}
+
+/* Posición de la X en la esquina superior derecha */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #888;
+    line-height: 1;
+}
+
+/* Contenedor de botones con separación */
+.modal-actions {
+    margin-top: 30px; /* Separa los botones de los inputs */
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacio exacto entre el botón Entrar y Registrarse */
+}
+
+/* Estilo opcional para el botón de registro (el gris) */
+.btn-secundario {
+    background-color: #555 ;
+}
+
+.close-btn:hover {
+    color: #ff6b8e;
+}
+
+
+
+
+
+
+
+/* ESTILO PARA LA X DE CIERRE EN MODALES */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+}
+
+
+/* Oculto por defecto */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+/* Solo se despliega si el JS añade la clase 'sesion-activa' al li */
+.dropdown.sesion-activa:hover .dropdown-menu {
+    display: block;
+}
+
+
+.user-greeting {
+    font-weight: 600;
+    color: #e84c7f; /* El color rosa de tu marca */
+    margin-right: 15px;
+}
+
+.btn-logout {
+    color: #555 !important;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    background-color: #fce4ec;
+    color: #e84c7f !important;
+    border-color: #e84c7f;
+}
+
+
+/* ==== ESTILOS DEL MENÚ DESPLEGABLE DE PRODUCTOS ==== */
+.nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav > li {
+    position: relative; /* Para que el menú colgante sepa su punto de anclaje */
+    margin-right: 20px;
+}
+
+/* El botón de Productos */
+.dropdown > a {
+    cursor: pointer;
+}
+
+/* La cajita que contiene las categorías (oculta por defecto) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* Sutilmente debajo del texto */
+    left: 0;
+    background-color: #ffffff;
+    min-width: 220px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+/* Mostrar la cajita al pasar el mouse */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Estilo de los enlaces dentro del menú desplegable */
+.dropdown-content li {
+    display: block;
+    width: 100%;
+}
+
+.dropdown-content a {
+    color: #555;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover en las categorías */
+.dropdown-content a:hover {
+    background-color: #ffeef3; /* Fondo rosa claro */
+    color: #e84c7f !important; /* Texto rosa oscuro */
+    padding-left: 25px; /* Efecto sutil de desplazamiento */
+}
+
+
+/* === ESTILOS EXCLUSIVOS DEL PANEL SUPER ADMIN === */
+.super-panel {
+    background-color: #fff3e0;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px dashed #ff9800;
+    margin-bottom: 30px;
+}
+
+#seccion-crear-mod {
+    background: white; 
+    padding: 20px; 
+    border-radius: 8px; 
+    margin-top: 15px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+
+
+/* === SECCIÓN DE CONTACTO === */
+.contacto-container {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #fff5f8; /* Fondo suave rosado */
+    border-radius: 20px;
+    border: 1px solid #fce4ec;
+}
+
+.contacto-title {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.contacto-description {
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 1.1em;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contacto-grid {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.contacto-card {
+    text-decoration: none;
+    color: #333;
+    background: white;
+    padding: 30px 20px;
+    border-radius: 15px;
+    width: 260px;
+    box-shadow: 0 4px 15px rgba(232, 76, 127, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contacto-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(232, 76, 127, 0.2);
+}
+
+.contacto-icon {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.contacto-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    color: #333;
+}
+
+.contacto-card p {
+    font-size: 0.95em;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Colores de borde inferior para cada red */
+.card-whatsapp { border-bottom: 4px solid #4CAF50; }
+.card-email { border-bottom: 4px solid #e84c7f; }
+.card-instagram { border-bottom: 4px solid #E1306C; }
+
+.email-highlight {
+    color: #e84c7f;
+    font-weight: bold;
+}

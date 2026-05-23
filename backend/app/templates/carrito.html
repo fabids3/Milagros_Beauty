@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Carrito - Milagro´s Beauty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Milagro´s<span>Beauty</span></h1>
+            <nav class="nav">
+                <ul><li><a href="/">Volver a la Tienda</a></li></ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 50px;">
+        <h2 class="section-title">Tu Selección de Belleza</h2>
+        
+        <div class="carrito-wrapper">
+            <table class="tabla-carrito">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-carrito"></tbody>
+            </table>
+
+            <div class="resumen-contenedor">
+                <div class="total-pago">
+                    Total: <span id="total">$0</span>
+                </div>
+                
+                <div class="botones-acciones">
+                    <button id="vaciar-carrito" class="btn-vaciar-accion">Vaciar Carrito</button>
+                    <button id="btn-whatsapp" class="btn-pagar" style="background-color: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 15px;">
+    💬 Finalizar Pedido por WhatsApp
+</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='_session_patch.js') }}"></script>
+    <script src="{{ url_for('static', filename='carrito.js') }}"></script>
+</body>
+</html>

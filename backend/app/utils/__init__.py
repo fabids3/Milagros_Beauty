@@ -1,0 +1,1 @@
+"""Paquete utils: helpers transversales sin lógica de negocio."""

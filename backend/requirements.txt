@@ -1,0 +1,21 @@
+# ============================================================================
+# DEPENDENCIAS DEL BACKEND — Milagro's Beauty
+# ----------------------------------------------------------------------------
+# Instalación:
+#   pip install -r requirements.txt
+# ============================================================================
+
+# Framework web
+Flask==3.0.3
+
+# CORS para permitir peticiones desde el frontend
+Flask-Cors==4.0.1
+
+# Hashing seguro de contraseñas (bcrypt)
+Flask-Bcrypt==1.0.1
+
+# Conector oficial de MySQL para Python
+mysql-connector-python==8.4.0
+
+# Lectura de variables de entorno desde el archivo .env
+python-dotenv==1.0.1

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milagro's Beauty - Tienda Oficial</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <h1 class="logo">Milagro's<span>Beauty</span></h1>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="input-buscador" placeholder="¿Qué milagro buscas hoy?">
+            </div>
+
+            <nav class="nav">
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    
+                    <li id="menu-admin" style="display: none;">
+                        <a href="/admin" style="color: #e84c7f; font-weight: bold;">Admin</a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#contenedor-productos" id="menu-productos">Productos ▼</a>
+                        <ul class="dropdown-content">
+                            <li><a href="#" class="cat-link" data-id="1">Shampoos</a></li>
+                            <li><a href="#" class="cat-link" data-id="2">Acondicionadores</a></li>
+                            <li><a href="#" class="cat-link" data-id="3">Tratamientos</a></li>
+                            <li><a href="#" class="cat-link" data-id="4">Mascarillas</a></li>
+                            <li><a href="#" class="cat-link" data-id="5">Serums y Gotas</a></li>
+                            <li><a href="#" class="cat-link" data-id="6">Perfumes Capilares</a></li>
+                            <li><a href="#" class="cat-link" data-id="7">Accesorios</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    
+                    <li>
+                        <a href="#" id="login-link">Iniciar Sesión</a>
+                    </li>
+
+                    <li>
+                        <a href="/carrito.html" class="carrito-link" id="cart-link">
+                            🛒 MI CARRITO
+                            <span id="cart-count" class="contador-carrito">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Cuida tu belleza con productos naturales</h2>
+                <p>Descubre nuestra línea capilar y facial diseñada especialmente para resaltar tu esencia natural.</p>
+                <a href="#contenedor-productos" class="btn">Ver Productos</a>
+            </div>
+        </section>
+
+        <div class="container" style="margin-top: 50px;">
+            <h2 class="section-title">Nuestros Productos</h2>
+            <div id="contenedor-productos" class="productos-grid"></div>
+        </div>
+
+        <section id="nosotros" class="nosotros container">
+            <div class="nosotros-card">
+                <div class="nosotros-content">
+                    <h2 class="section-title">Sobre Nosotros</h2>
+                    
+                    <p id="txt-sobre">Cargando información de la tienda...</p>
+                    
+                    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin: 30px 0;">
+                        <div style="flex: 1; min-width: 250px;">
+                            <h3 style="color: #d81b60; margin-bottom: 10px;">Nuestra Misión</h3>
+                            <p id="txt-mision"></p>
+                        </div>
+                        <div style="flex: 1; min-width: 250px;">
+                            <h3 style="color: #d81b60; margin-bottom: 10px;">Nuestra Visión</h3>
+                            <p id="txt-vision"></p>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #e84c7f; margin-top: 20px;">📍 Encuéntranos</h3>
+                    <p id="txt-ubicacion" style="font-weight: bold; margin-bottom: 20px;"></p>
+
+                    <div class="nosotros-footer">
+                        <span>✨ Belleza Real ✨</span>
+                        <span>💖 Cuidado Natural 💖</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="contacto" class="container contacto-container">
+            <h2 class="contacto-title">¿Necesitas ayuda? Comunícate con nosotros</h2>
+            <p class="contacto-description">
+                Estamos aquí para asesorarte, resolver tus dudas sobre nuestros productos o ayudarte con tus pedidos. ¡Hablemos!
+            </p>
+            
+            <div class="contacto-grid">
+                
+                <a href="https://wa.me/573232506137" target="_blank" class="contacto-card card-whatsapp">
+                    <div class="contacto-icon">💬</div>
+                    <h3>WhatsApp</h3>
+                    <p>Atención rápida y asesoría personalizada para tu tipo de cabello.</p>
+                </a>
+                
+                <a href="mailto:soporte@milagrosbeauty.com" class="contacto-card card-email">
+                    <div class="contacto-icon">✉️</div>
+                    <h3>Correo Electrónico</h3>
+                    <p>Escríbenos a: <br><span class="email-highlight">soporte@milagrosbeauty.com</span></p>
+                </a>
+
+                <a href="https://instagram.com/tu_usuario" target="_blank" class="contacto-card card-instagram">
+                    <div class="contacto-icon">📸</div>
+                    <h3>Instagram</h3>
+                    <p>Síguenos para tips, tutoriales y novedades de nuestra tienda.</p>
+                </a>
+
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Milagro's Beauty. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <div id="login-overlay"></div>
+    
+    <section id="login-section-modal" class="login-section">
+        <div class="login-frame">
+            <button type="button" class="close-btn">&times;</button>
+            <h2 class="section-title">Iniciar Sesión</h2>
+            <form id="login-form" class="login-form">
+                <label for="login-email">Correo Electrónico</label>
+                <input type="email" id="login-email" placeholder="ejemplo@correo.com" required>
+                
+                <label for="login-pass">Contraseña</label>
+                <input type="password" id="login-pass" placeholder="********" required>
+                
+                <div class="modal-actions" style="margin-top: 30px; display: flex; justify-content: center; gap: 15px;">
+                    <button type="submit" class="login-btn">Entrar</button>
+                    <button type="button" id="btn-abrir-registro" class="login-btn" style="background:#555;">Registrarse</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="register-section-modal" class="login-section">
+        <div class="login-frame">
+            <button type="button" class="close-btn">&times;</button>
+            <h2 class="section-title">Crear Cuenta</h2>
+            <form id="register-form">
+                <div class="form-group"><label>Nombre</label><input type="text" id="register-nombre" required></div>
+                <div class="form-group"><label>Apellido</label><input type="text" id="register-apellido" required></div>
+                <div class="form-group"><label>Teléfono</label><input type="tel" id="register-telefono" required></div>
+                <div class="form-group"><label>Correo Electrónico</label><input type="email" id="register-email" required></div>
+                <div class="form-group"><label>Contraseña</label><input type="password" id="register-pass" required></div>
+                <button type="submit" class="login-btn">Crear mi Cuenta</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='_session_patch.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
