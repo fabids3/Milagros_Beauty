@@ -57,6 +57,12 @@ def create_app(config_class=None):
     # 2) Cargar configuración (lee variables del archivo .env).
     config = config_class or get_config()
     app.config.from_object(config)
+    app.logger.warning(f"FLASK_ENV activo: {app.config.get('ENV', 'no-env')}")
+    app.logger.warning(f"DB host: {app.config['DB_CONFIG'].get('host')}")
+    app.logger.warning(f"DB port: {app.config['DB_CONFIG'].get('port')}")
+    app.logger.warning(f"DB user: {app.config['DB_CONFIG'].get('user')}")
+    app.logger.warning(f"DB name: {app.config['DB_CONFIG'].get('database')}")
+    app.logger.warning(f"DB ssl_disabled: {app.config['DB_CONFIG'].get('ssl_disabled')}")
 
     # 3) Inicializar extensiones de Flask (bcrypt, CORS) sobre esta app.
     #    El patrón init_app() permite que las extensiones se creen una sola vez
