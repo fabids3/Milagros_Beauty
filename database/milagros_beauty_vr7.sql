@@ -80,7 +80,11 @@ CREATE TABLE `configuracion` (
 --
 
 INSERT INTO `configuracion` (`id`, `titulo`, `sobre_nosotros`, `mision`, `vision`, `ubicacion`) VALUES
+<<<<<<< HEAD
 (1, 'Milagro\'s Beauty✨', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Ubicación física: Calle de Ejemplo #123, Ciudad');
+=======
+(1, 'Milagro\'s Beauty', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Ubicación física: Calle de Ejemplo #123, Ciudad');
+>>>>>>> f1bd33df72025427b42ea0ceb3dfd1a52ea50dd2
 
 -- --------------------------------------------------------
 

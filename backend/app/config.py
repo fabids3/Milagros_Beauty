@@ -45,7 +45,11 @@ class Config:
         "port": int(os.getenv("DB_PORT", 3306)),
         "user": os.getenv("DB_USER", "root"),
         "password": os.getenv("DB_PASSWORD", ""),
+<<<<<<< HEAD
         "database": os.getenv("DB_NAME", "milagros_beauty_vr7"),
+=======
+        "database": os.getenv("DB_NAME", "milagros_beauty"),
+>>>>>>> f1bd33df72025427b42ea0ceb3dfd1a52ea50dd2
         # Charset explícito para soportar tildes y emojis (Milagro's Beauty✨)
         "charset": "utf8mb4",
         "use_unicode": True,
