@@ -19,3 +19,6 @@ mysql-connector-python==8.4.0
 
 # Lectura de variables de entorno desde el archivo .env
 python-dotenv==1.0.1
+
+# Servidor WSGI para despliegue en producción
+gunicorn==22.0.0
