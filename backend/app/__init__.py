@@ -18,6 +18,7 @@
 ================================================================================
 """
 
+import logging
 from flask import Flask
 
 from app.config import get_config
@@ -45,6 +46,13 @@ def create_app(config_class=None):
         static_folder="static",
         template_folder="templates",
     )
+
+    # En producción con Gunicorn, hacemos que app.logger escriba en los mismos
+    # handlers que gunicorn.error para que Railway muestre bien los tracebacks.
+    gunicorn_error_logger = logging.getLogger("gunicorn.error")
+    if gunicorn_error_logger.handlers:
+        app.logger.handlers = gunicorn_error_logger.handlers
+        app.logger.setLevel(gunicorn_error_logger.level or logging.DEBUG)
 
     # 2) Cargar configuración (lee variables del archivo .env).
     config = config_class or get_config()
