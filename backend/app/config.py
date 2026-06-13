@@ -45,7 +45,7 @@ class Config:
     "port": int(os.getenv("DB_PORT", 3306)),
     "user": os.getenv("DB_USER", "root"),
     "password": os.getenv("DB_PASSWORD", ""),
-    "database": os.getenv("DB_NAME", "milagros_beauty_vr7"),
+    "database": os.getenv("DB_NAME", "railway"),
     "charset": "utf8mb4",
     "use_unicode": True,
     "ssl_disabled": True,
