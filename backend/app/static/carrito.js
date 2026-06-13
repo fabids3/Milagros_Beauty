@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const contenedor = document.getElementById("lista-carrito");
     const totalDiv = document.getElementById("total");
     const btnVaciar = document.getElementById("vaciar-carrito");
-    const API_URL = "http://127.0.0.1:5000";
+    const API_URL = window.location.origin;
 
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
@@ -20,12 +20,22 @@ document.addEventListener("DOMContentLoaded", () => {
         carrito.forEach((item, index) => {
             const subtotal = item.precio * item.cantidad;
             total += subtotal;
+
+            const imagenSrc = item.imagen
+                ? (
+                    item.imagen.startsWith('/static/')
+                        ? item.imagen
+                        : item.imagen.startsWith('/imagenes/')
+                            ? `/static${item.imagen}`
+                            : `/static/imagenes/${item.imagen}`
+                )
+                : '/static/imagenes/image_default.jpeg';
             
             const tr = document.createElement("tr");
             tr.innerHTML = `
                 <td>
                     <div style="display:flex; align-items:center; gap:10px;">
-                        <img src="${item.imagen}" class="img-carrito" width="50">
+                        <img src="${imagenSrc}" class="img-carrito" width="50">
                         <span>${item.nombre}</span>
                     </div>
                 </td>
@@ -58,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Ahora descuenta del stock real en la DB antes de sumar en el carrito
         if (target.classList.contains("btn-sumar")) {
             try {
-                const res = await fetch(`${API_URL}/descontar_stock`, {
+                const res = await fetch(`${API_URL}/descontarstock`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({ id: producto.id })
@@ -77,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // --- BOTÓN RESTAR (-) ---
         if (target.classList.contains("btn-restar")) {
-            await fetch(`${API_URL}/sumar_stock`, {
+            await fetch(`${API_URL}/sumarstock`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ id: producto.id, cantidad: 1 })
@@ -93,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // --- BOTÓN ELIMINAR (X) ---
         if (target.classList.contains("btn-eliminar")) {
-            await fetch(`${API_URL}/sumar_stock`, {
+            await fetch(`${API_URL}/sumarstock`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ id: producto.id, cantidad: producto.cantidad })
@@ -113,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!confirm("¿Vaciar todo el carrito?")) return;
 
         for (let prod of carrito) {
-            await fetch(`${API_URL}/sumar_stock`, {
+            await fetch(`${API_URL}/sumarstock`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ id: prod.id, cantidad: prod.cantidad })
@@ -131,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (carrito.length === 0) return alert("Tu carrito está vacío.");
 
         try {
-            const res = await fetch(`${API_URL}/finalizar_compra`, {
+            const res = await fetch(`${API_URL}/finalizar-compra`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -174,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             try {
                 // 1. Guardar en Base de Datos (Flask)
-                const response = await fetch(`http://127.0.0.1:5000/finalizar-compra`, {
+                const response = await fetch(`${API_URL}/finalizar-compra`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -211,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             } catch (error) {
                 console.error("Error de conexión:", error);
-                alert("Error de conexión. Verifica que el servidor de Python (app.py) esté encendido.");
+                alert("Error de conexión con el servidor. Intenta nuevamente en unos segundos.");
                 btnWhatsapp.textContent = "💬 Finalizar Pedido por WhatsApp";
                 btnWhatsapp.disabled = false;
             }
