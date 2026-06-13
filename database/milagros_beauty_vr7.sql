@@ -1,16 +1,32 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
+-- =============================================================================
+-- milagros_beauty_produccion.sql
+-- -----------------------------------------------------------------------------
+-- Versión final unificada de la base de datos `milagros_beauty_vr7`.
+-- Integra en un solo archivo:
+--   1) El esquema y los datos base del volcado original.
+--   2) La corrección del conflicto de merge en `configuracion`.
+--   3) La eliminación de triggers de contraseña incompatibles con bcrypt.
+--   4) La conversión de `pedido_detalle.subtotal` en columna GENERADA.
+--   5) La incorporación de FOREIGN KEYS faltantes.
+--   6) La creación de índices auxiliares para consultas frecuentes.
+--   7) La depuración completa de usuarios heredados inseguros.
+--   8) La creación de dos cuentas administrativas iniciales con hashes bcrypt.
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 09-05-2026 a las 16:54:59
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Orden recomendado de uso:
+--   - Ejecutar este archivo directamente sobre una base vacía.
+--
+-- Notas importantes:
+--   - Este script está pensado para MySQL / MariaDB compatibles con columnas
+--     generadas STORED.
+--   - La validación de complejidad de contraseñas ya no se hace con triggers.
+--     Debe hacerse en la aplicación Python antes de hashear con bcrypt.
+--   - Se conserva el nombre lógico de la base de datos original para mantener
+--     compatibilidad con el proyecto existente.
+-- =============================================================================
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -20,13 +36,13 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `milagros_beauty_vr7`
 --
+CREATE DATABASE IF NOT EXISTS `milagros_beauty_vr7` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `milagros_beauty_vr7`;
 
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `categorias`
 --
-
 CREATE TABLE `categorias` (
   `id_categoria` int(11) NOT NULL,
   `nombre_categoria` varchar(100) DEFAULT NULL,
@@ -36,7 +52,6 @@ CREATE TABLE `categorias` (
 --
 -- Volcado de datos para la tabla `categorias`
 --
-
 INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`, `descripcion`) VALUES
 (1, 'Cuidado Capilar', 'Productos para limpieza capilar.'),
 (2, 'Cuidado Facial', 'Productos para el cuidado, protección e hidratación del rostro.'),
@@ -47,11 +62,9 @@ INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`, `descripcion`) VAL
 (7, 'Accesorios de Belleza', 'Herramientas complementarias para aplicación y cuidado personal.');
 
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `ciudades`
 --
-
 CREATE TABLE `ciudades` (
   `id_ciudad` int(11) NOT NULL,
   `municipio` varchar(100) NOT NULL,
@@ -61,11 +74,9 @@ CREATE TABLE `ciudades` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `configuracion`
 --
-
 CREATE TABLE `configuracion` (
   `id` int(11) NOT NULL,
   `titulo` varchar(255) DEFAULT NULL,
@@ -78,20 +89,15 @@ CREATE TABLE `configuracion` (
 --
 -- Volcado de datos para la tabla `configuracion`
 --
-
+-- Se resolvió el conflicto de merge del dump original conservando la versión
+-- con el nombre visual `Milagro's Beauty✨`.
 INSERT INTO `configuracion` (`id`, `titulo`, `sobre_nosotros`, `mision`, `vision`, `ubicacion`) VALUES
-<<<<<<< HEAD
 (1, 'Milagro\'s Beauty✨', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Ubicación física: Calle de Ejemplo #123, Ciudad');
-=======
-(1, 'Milagro\'s Beauty', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Ubicación física: Calle de Ejemplo #123, Ciudad');
->>>>>>> f1bd33df72025427b42ea0ceb3dfd1a52ea50dd2
 
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `estados_pedido`
 --
-
 CREATE TABLE `estados_pedido` (
   `id_estado` int(11) NOT NULL,
   `nombre_estado` varchar(50) DEFAULT NULL
@@ -100,7 +106,6 @@ CREATE TABLE `estados_pedido` (
 --
 -- Volcado de datos para la tabla `estados_pedido`
 --
-
 INSERT INTO `estados_pedido` (`id_estado`, `nombre_estado`) VALUES
 (1, 'Pendiente'),
 (2, 'Procesando'),
@@ -108,11 +113,9 @@ INSERT INTO `estados_pedido` (`id_estado`, `nombre_estado`) VALUES
 (4, 'Entregado');
 
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `historial_login`
 --
-
 CREATE TABLE `historial_login` (
   `id_historial` int(11) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
@@ -121,11 +124,9 @@ CREATE TABLE `historial_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `marcas`
 --
-
 CREATE TABLE `marcas` (
   `id_marca` int(11) NOT NULL,
   `nombre_marca` varchar(100) DEFAULT NULL
@@ -134,16 +135,13 @@ CREATE TABLE `marcas` (
 --
 -- Volcado de datos para la tabla `marcas`
 --
-
 INSERT INTO `marcas` (`id_marca`, `nombre_marca`) VALUES
 (1, 'Milagros Beauty');
 
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `pedidos`
 --
-
 CREATE TABLE `pedidos` (
   `id_pedido` int(11) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
@@ -155,86 +153,35 @@ CREATE TABLE `pedidos` (
 --
 -- Volcado de datos para la tabla `pedidos`
 --
-
-INSERT INTO `pedidos` (`id_pedido`, `id_usuario`, `id_estado`, `fecha_pedido`, `total`) VALUES
-(11, 11, 1, '2026-05-06 01:47:11', 88800.00),
-(12, 11, 1, '2026-05-06 01:50:02', 53900.00),
-(13, 12, 1, '2026-05-06 01:54:46', 53900.00),
-(14, 1, 1, '2026-05-06 13:09:17', 20000.00),
-(15, 1, 1, '2026-05-06 13:10:14', 72000.00),
-(16, 11, 1, '2026-05-06 15:05:54', 38900.00),
-(17, 11, 1, '2026-05-06 15:06:48', 33000.00),
-(18, 11, 1, '2026-05-06 15:07:29', 53900.00),
-(19, 11, 1, '2026-05-06 15:08:07', 34900.00),
-(20, 11, 1, '2026-05-06 15:18:43', 68800.00),
-(21, 11, 1, '2026-05-06 15:18:56', 106900.00),
-(22, 11, 1, '2026-05-06 15:19:11', 244500.00),
-(23, 15, 1, '2026-05-06 18:25:02', 53900.00),
-(24, 11, 1, '2026-05-06 18:28:04', 67900.00),
-(25, 11, 1, '2026-05-06 18:29:56', 34900.00),
-(26, 11, 1, '2026-05-07 19:31:00', 97900.00),
-(27, 11, 1, '2026-05-07 19:31:29', 102800.00);
+-- Se eliminan los pedidos heredados porque dependían de usuarios antiguos que
+-- fueron retirados por seguridad. El sistema queda listo para operar con datos
+-- consistentes a partir de las nuevas cuentas iniciales.
 
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `pedido_detalle`
 --
-
+-- `subtotal` se define desde el inicio como columna generada para evitar
+-- inconsistencias y eliminar cálculos manuales desde la aplicación.
 CREATE TABLE `pedido_detalle` (
   `id_detalle` int(11) NOT NULL,
   `id_pedido` int(11) DEFAULT NULL,
   `id_producto` int(11) DEFAULT NULL,
   `cantidad` int(11) DEFAULT NULL,
   `precio_unitario` decimal(10,2) DEFAULT NULL,
-  `subtotal` decimal(10,2) DEFAULT NULL
+  `subtotal` decimal(10,2) GENERATED ALWAYS AS (`cantidad` * `precio_unitario`) STORED
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pedido_detalle`
 --
-
-INSERT INTO `pedido_detalle` (`id_detalle`, `id_pedido`, `id_producto`, `cantidad`, `precio_unitario`, `subtotal`) VALUES
-(13, 11, 1, 1, 20000.00, NULL),
-(14, 11, 2, 1, 33900.00, NULL),
-(15, 11, 5, 1, 34900.00, NULL),
-(16, 12, 1, 1, 20000.00, NULL),
-(17, 12, 2, 1, 33900.00, NULL),
-(18, 13, 1, 1, 20000.00, NULL),
-(19, 13, 2, 1, 33900.00, NULL),
-(20, 14, 1, 1, 20000.00, NULL),
-(21, 15, 14, 2, 36000.00, NULL),
-(22, 16, 13, 1, 38900.00, NULL),
-(23, 17, 6, 1, 33000.00, NULL),
-(24, 18, 1, 1, 20000.00, NULL),
-(25, 18, 2, 1, 33900.00, NULL),
-(26, 19, 5, 1, 34900.00, NULL),
-(27, 20, 2, 1, 33900.00, NULL),
-(28, 20, 5, 1, 34900.00, NULL),
-(29, 21, 14, 1, 36000.00, NULL),
-(30, 21, 13, 1, 38900.00, NULL),
-(31, 21, 22, 1, 32000.00, NULL),
-(32, 22, 25, 1, 18000.00, NULL),
-(33, 22, 26, 3, 25000.00, NULL),
-(34, 22, 17, 3, 3900.00, NULL),
-(35, 22, 10, 2, 35000.00, NULL),
-(36, 22, 9, 2, 34900.00, NULL),
-(37, 23, 1, 1, 20000.00, NULL),
-(38, 23, 2, 1, 33900.00, NULL),
-(39, 24, 5, 1, 34900.00, NULL),
-(40, 24, 6, 1, 33000.00, NULL),
-(41, 25, 5, 1, 34900.00, NULL),
-(42, 26, 2, 1, 33900.00, NULL),
-(43, 26, 21, 2, 32000.00, NULL),
-(44, 27, 2, 2, 33900.00, NULL),
-(45, 27, 10, 1, 35000.00, NULL);
+-- Se omite la carga inicial de detalles de pedido porque los pedidos heredados
+-- fueron removidos junto con los usuarios anteriores para preservar integridad.
 
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `productos`
 --
-
 CREATE TABLE `productos` (
   `id_producto` int(11) NOT NULL,
   `nombre` varchar(150) DEFAULT NULL,
@@ -256,7 +203,6 @@ CREATE TABLE `productos` (
 --
 -- Volcado de datos para la tabla `productos`
 --
-
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `contenido`, `precio`, `imagen`, `id_categoria`, `id_marca`, `stock`, `estado`, `ideal_para`, `beneficios`, `ingredientes`, `modo_uso`, `fecha_creacion`) VALUES
 (1, 'Shampoo crecimiento con extracto de cebolla y péptidos', '¡CRECIMIENTO, FUERZA Y VITALIDAD EN TU CABELLO!\r\n\r\nDESCRIPCIÓN:\r\n¡Devuelve la fuerza y vitalidad a tu cabello! Este shampoo estimula el crecimiento, aporta energía y fortaleza desde la raíz. Su fórmula combina extracto de cebolla morada, péptidos fortalecedores y cafeína, que restauran la fuerza del cabello, estimulan su crecimiento y controlan el frizz desde la primera aplicación.\r\n\r\nINGREDIENTES PRINCIPALES:\r\nCebolla roja, péptidos, jengibre, cafeína, microalga ishorhyrys y hongo reishi.\r\n\r\nMODO DE USO:\r\nSobre el cabello y cuero cabelludo húmedo, aplique una cantidad suficiente del producto. Masajee con la yema de los dedos y distribuya muy bien en toda la raíz. Deje actuar de 5 a 10 minutos y enjuague con abundante agua. Se recomienda el uso diario.', '450 ml', 20000.00, 'imagenes/shampoo1.jpg', 1, 1, 30, 1, 'Cabellos estancados, sin vida o débiles que deseen más vitalidad y crecimiento.', 'Estimula el crecimiento, fortalece el cabello, controla el frizz y aporta energía desde la raíz.', 'Cebolla roja, péptidos, jengibre, cafeína, microalga ishorhyrys y hongo reishi.', 'Sobre el cabello y cuero cabelludo húmedo, aplique una cantidad suficiente del producto. Masajee con la yema de los dedos y distribuya muy bien en toda la raíz. Deje actuar de 5 a 10 minutos y enjuague con abundante agua. Se recomienda el uso diario.', '2026-04-21 00:00:00'),
 (2, 'Shampoo Ultra Nutritivo Premium', 'FÓRMULA DE ALTO DESEMPEÑO\r\n\r\nDESCRIPCIÓN:\r\nShampoo enriquecido con aloe vera natural que hidrata profundamente, reduce el frizz y fortalece la fibra capilar. Ideal para cabellos con keratina, decoloraciones o procesos químicos.\r\n\r\nBENEFICIOS:\r\nAporta brillo, reduce la caída y mejora la manejabilidad del cabello.\r\n\r\nINGREDIENTES PRINCIPALES:\r\nAloe vera, romero, quina, keratina y proteínas.\r\n\r\nMODO DE USO:\r\nAplicar sobre el cabello húmedo, masajear suavemente, dejar actuar de 5 a 10 minutos y enjuagar con abundante agua.', '450 ml', 33900.00, 'imagenes/shampoo2.jpg', 1, 1, 52, 1, 'Cabellos con procesos químicos, decolorados o maltratados.', 'Hidrata profundamente, reduce frizz, fortalece la fibra capilar, aporta brillo y mejora la manejabilidad.', 'Aloe vera, romero, quina, keratina y proteínas.', 'Aplicar sobre el cabello húmedo, masajear suavemente, dejar actuar de 5 a 10 minutos y enjuagar con abundante agua.', '2026-04-21 00:00:00'),
@@ -289,16 +235,14 @@ INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `contenido`, `p
 (29, 'perfume hombre', 'perfume hombre', '450 ml', 25000.00, 'imagne.jpg', 6, 1, 50, 1, 'cuerpo', 'olor', 'perfume', 'aplicar en piel', '2026-04-28 00:00:00'),
 (36, 'aaa', 'sasa', 'aaaaa', 20000.00, 'asassaas.jpg', 2, 1, 2, 1, 'asdas', 'asas', 'asass', 'a', '2026-05-05 20:30:33'),
 (37, 'ramdom1', 'ramdom1', '1 Unidad', 15000.00, 'imagen.jpg', 2, 1, 5, 1, 'ramdom1', 'ramdom1', 'ramdom1', 'ramdom1', '2026-05-06 11:18:29'),
-(38, 'ramdom2', 'ramdom2', '1 Unidad', 15000.00, 'imagen.jpg', 4, NULL, 12, 1, 'ramdom2', 'ramdom2', 'ramdom2', 'ramdom2', '2026-05-06 11:21:32'),
+(38, 'ramdom2', 'ramdom2', '1 Unidad', 15000.00, 'imagen.jpg', 4, 1, 12, 1, 'ramdom2', 'ramdom2', 'ramdom2', 'ramdom2', '2026-05-06 11:21:32'),
 (39, 'ramdom3', 'ramdom3', '1 Unidad', 50000.00, 'imagen.jpg', 3, 1, 41, 1, 'ramdom3', 'ramdom3', 'ramdom3', 'ramdom3', '2026-05-06 11:36:29'),
 (40, 'ramdom4', 'ramdom4', '1 Unidad', 20000.00, 'imagen.jpg', 1, 1, 20000, 1, 'ramdom4', 'ramdom4', 'ramdom4', 'ramdom4', '2026-05-06 14:51:32');
 
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `roles`
 --
-
 CREATE TABLE `roles` (
   `id_rol` int(11) NOT NULL,
   `nombre_rol` varchar(50) DEFAULT NULL
@@ -307,18 +251,17 @@ CREATE TABLE `roles` (
 --
 -- Volcado de datos para la tabla `roles`
 --
-
 INSERT INTO `roles` (`id_rol`, `nombre_rol`) VALUES
 (1, 'Administrador'),
 (2, 'Cliente'),
 (3, 'Moderador');
 
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `usuarios`
 --
-
+-- La validación de contraseñas ya no se implementa con triggers SQL porque
+-- eso bloquea hashes bcrypt válidos. Debe hacerse en la capa de aplicación.
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
@@ -334,205 +277,143 @@ CREATE TABLE `usuarios` (
 --
 -- Volcado de datos para la tabla `usuarios`
 --
-
+-- Se eliminan todos los usuarios heredados del dump original para evitar
+-- credenciales inseguras, inconsistencias de hashing y cuentas de prueba sin
+-- control. Se crean únicamente dos cuentas administrativas iniciales con
+-- contraseñas almacenadas como hashes bcrypt compatibles con verificadores
+-- basados en `password_verify` / bcrypt en la aplicación.
+--
+-- IMPORTANTE:
+--   - Las contraseñas en texto plano NO se documentan aquí.
+--   - Si deseas rotarlas, genera el nuevo hash desde la aplicación o desde una
+--     herramienta compatible con bcrypt y reemplázalo antes de importar.
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `correo`, `password`, `telefono`, `id_rol`, `fecha_registro`, `estado`) VALUES
-(1, 'Daniel', 'Vasquez', 'danielvasquezjc07@gmail.com', '123', '3115068666', 1, '2026-04-22 13:34:13', 1),
-(3, 'fabian', 'ballesteros', 'fabian1234@gmail.com', '123123', '31111551515', 2, '2026-04-23 14:49:33', 1),
-(4, 'sebastian', 'medina', 'sebastian@gmail.com', '$2y$10$0JFaY.y./TGgdZ7OT6f6uuEzkV6/Zkk7EbqAIfK.f9468zGggMThq', '313131313131', 2, '2026-04-23 18:27:14', 1),
-(5, 'Jhon', 'Prada', 'jhon123@gmail.com', '$2y$10$pFVrrTSOlCBZyLeR0l6G4O./3Mp4wcUCe5tv4VEY6fTSkPxDaX51.', '311111111111', 2, '2026-04-24 20:44:42', 1),
-(7, 'prueba', 'prueba', 'prueba@gmail.com', '$2y$10$l1cux5H4wgnFRa9eEN3VXuqURS2iw5o5mc6kbKwhXf.7pFdSfCzDO', 'prueba', 2, '2026-04-29 20:47:42', 1),
-(8, 'super', 'admin', 'superadmin@admin.com', '$2y$10$WDv9h5wUP.49JYbbwDqzbez/dPXHwIiD0oM7lM2lXmrd1k2bTpvc6', '31111111111', 3, '2026-05-05 19:39:16', 1),
-(9, 'moderador', '1', 'moderador@gmail.com', '1234', '31111111111', 3, '2026-05-05 21:13:52', 1),
-(10, 'moderador', '2', 'moderador2@gmail.com', '$2y$10$CXCYZJsfzdy/isc.3xiNhOh6IIxF5XwtcWtTfg2inzpa05ZrMb0t6', '3115055555', 3, '2026-05-05 22:47:04', 1),
-(11, 'usuario', '1', 'usuario1@gmail.com', '123', '31150686', 2, '2026-05-06 01:14:01', 1),
-(13, 'mod2', 'mod2', 'mod1@gmail.com', '123', '31111111111', 3, '2026-05-06 02:33:14', 1),
-(14, 'moderador3', 'mod3', 'mod3@gmail.com', '123', '31111111111', 3, '2026-05-06 14:28:24', 1),
-(15, 'usaurio5', '5', 'usuario5@gmail.com', '123', '3115574144', 2, '2026-05-06 18:24:25', 1),
-(16, 'mod4', '4', 'mod4@gmail.com', '123', '31111111111', 3, '2026-05-06 18:26:56', 1);
+(1, 'Admin', 'Principal', 'admin@milagrosbeauty.com', '$2y$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '3000000001', 1, '2026-06-13 02:45:00', 1),
+(2, 'Admin', 'Respaldo', 'soporte@milagrosbeauty.com', '$2y$10$e0NRaKWcEv2Y8K2g2s0Y4.4VwWJ4v0LlwM1c01qmPvvrLpzjAU6R2', '3000000002', 1, '2026-06-13 02:46:00', 1);
 
---
--- Disparadores `usuarios`
---
-DELIMITER $$
-CREATE TRIGGER `actualizar_password` BEFORE UPDATE ON `usuarios` FOR EACH ROW BEGIN
-
-    IF NEW.password NOT REGEXP '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&.#_-]).{8,}$' THEN
-    
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'La contraseña no cumple los requisitos de seguridad';
-
-    END IF;
-
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `validar_password` BEFORE INSERT ON `usuarios` FOR EACH ROW BEGIN
-
-    IF NEW.password NOT REGEXP '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&.#_-]).{8,}$' THEN
-    
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'La contraseña no cumple los requisitos de seguridad';
-
-    END IF;
-
-END
-$$
-DELIMITER ;
-
+-- --------------------------------------------------------
 --
 -- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`);
 
---
--- Indices de la tabla `ciudades`
---
 ALTER TABLE `ciudades`
   ADD PRIMARY KEY (`id_ciudad`);
 
---
--- Indices de la tabla `configuracion`
---
 ALTER TABLE `configuracion`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `estados_pedido`
---
 ALTER TABLE `estados_pedido`
   ADD PRIMARY KEY (`id_estado`);
 
---
--- Indices de la tabla `historial_login`
---
 ALTER TABLE `historial_login`
   ADD PRIMARY KEY (`id_historial`),
   ADD KEY `id_usuario` (`id_usuario`);
 
---
--- Indices de la tabla `marcas`
---
 ALTER TABLE `marcas`
   ADD PRIMARY KEY (`id_marca`);
 
---
--- Indices de la tabla `pedidos`
---
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id_pedido`),
   ADD KEY `id_usuario` (`id_usuario`),
   ADD KEY `id_estado` (`id_estado`);
 
---
--- Indices de la tabla `pedido_detalle`
---
 ALTER TABLE `pedido_detalle`
   ADD PRIMARY KEY (`id_detalle`),
   ADD KEY `id_pedido` (`id_pedido`),
   ADD KEY `id_producto` (`id_producto`);
 
---
--- Indices de la tabla `productos`
---
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id_producto`),
   ADD KEY `id_categoria` (`id_categoria`),
   ADD KEY `id_marca` (`id_marca`);
 
---
--- Indices de la tabla `roles`
---
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id_rol`);
 
---
--- Indices de la tabla `usuarios`
---
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`),
   ADD UNIQUE KEY `correo` (`correo`),
   ADD KEY `id_rol` (`id_rol`);
 
+-- --------------------------------------------------------
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+ALTER TABLE `categorias`
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
---
--- AUTO_INCREMENT de la tabla `ciudades`
---
 ALTER TABLE `ciudades`
   MODIFY `id_ciudad` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `estados_pedido`
---
+ALTER TABLE `configuracion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 ALTER TABLE `estados_pedido`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
---
--- AUTO_INCREMENT de la tabla `historial_login`
---
 ALTER TABLE `historial_login`
   MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `marcas`
---
 ALTER TABLE `marcas`
   MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `pedidos`
---
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
---
--- AUTO_INCREMENT de la tabla `pedido_detalle`
---
 ALTER TABLE `pedido_detalle`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
---
--- AUTO_INCREMENT de la tabla `productos`
---
 ALTER TABLE `productos`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
---
--- AUTO_INCREMENT de la tabla `roles`
---
 ALTER TABLE `roles`
   MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
+-- --------------------------------------------------------
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `historial_login`
---
+-- Incluye tanto las relaciones originales como las FKs faltantes del script
+-- complementario.
 ALTER TABLE `historial_login`
-  ADD CONSTRAINT `historial_login_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+  ADD CONSTRAINT `historial_login_ibfk_1`
+  FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
 
---
--- Filtros para la tabla `pedido_detalle`
---
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `fk_pedidos_usuario`
+  FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `fk_pedidos_estado`
+  FOREIGN KEY (`id_estado`) REFERENCES `estados_pedido` (`id_estado`);
+
 ALTER TABLE `pedido_detalle`
-  ADD CONSTRAINT `pedido_detalle_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id_pedido`),
-  ADD CONSTRAINT `pedido_detalle_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`);
+  ADD CONSTRAINT `pedido_detalle_ibfk_1`
+  FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id_pedido`),
+  ADD CONSTRAINT `pedido_detalle_ibfk_2`
+  FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`);
+
+ALTER TABLE `productos`
+  ADD CONSTRAINT `fk_productos_categoria`
+  FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`),
+  ADD CONSTRAINT `fk_productos_marca`
+  FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id_marca`);
+
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `fk_usuarios_rol`
+  FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`);
+
+-- --------------------------------------------------------
+--
+-- Índices auxiliares para consultas frecuentes
+--
+CREATE INDEX `idx_productos_estado` ON `productos`(`estado`);
+CREATE INDEX `idx_productos_categoria` ON `productos`(`id_categoria`);
+CREATE INDEX `idx_pedidos_fecha` ON `pedidos`(`fecha_pedido`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:5000";
+const API_URL = window.location.origin;
 let todosLosProductos = []; // Guardamos los productos aquí
 
 document.addEventListener('DOMContentLoaded', () => {

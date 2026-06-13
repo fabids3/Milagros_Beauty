@@ -44,7 +44,12 @@ def get_db():
     """
     try:
         return mysql.connector.connect(**current_app.config["DB_CONFIG"])
+    
     except mysql.connector.Error as err:
+        current_app.logger.exception(f"Error real de MySQL: {err}")
+        raise BaseDeDatosError(
+            f"No se pudo conectar a la base de datos: {err}"
+        ) from err
         # Encapsulamos el error de driver en una excepción del dominio
         # para que las capas superiores no dependan de mysql.connector.
         raise BaseDeDatosError(
