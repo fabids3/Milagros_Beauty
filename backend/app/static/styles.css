@@ -1171,3 +1171,60 @@ body {
     color: #e84c7f;
     font-weight: bold;
 }
+
+
+@media (max-width: 768px) {
+  .header .container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .search-container,
+  .nav,
+  .logo-container {
+    width: 100%;
+  }
+
+  .nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+  }
+
+  .nav ul li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-content h2 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+
+  .productos-grid,
+  .contacto-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  .nosotros-content > div[style*="display: flex"] {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  .login-frame {
+    width: 90%;
+    max-width: 400px;
+  }
+}

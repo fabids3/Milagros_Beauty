@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:5000";
+const API_URL = window.location.origin;
 
 // ============================================================
 // 1. CONTROL DE ACCESO Y ARRANQUE (DOMContentLoaded)
