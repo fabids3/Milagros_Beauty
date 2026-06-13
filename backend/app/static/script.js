@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.className = 'producto';
                 const precioReal = Number(p.precio);
                 div.innerHTML = `
-                    <img src="${p.imagen}" alt="${p.nombre}">
+                    <img src="/static/imagenes/image_default.jpeg" alt="${p.nombre}">
                     <h3>${p.nombre}</h3>
                     <p class="precio">$${precioReal.toLocaleString('es-CO')}</p>
                     <button class="btn-agregar" 
