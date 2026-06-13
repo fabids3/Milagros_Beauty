@@ -18,6 +18,7 @@
 ================================================================================
 """
 
+import os
 import logging
 from flask import Flask
 
@@ -57,7 +58,7 @@ def create_app(config_class=None):
     # 2) Cargar configuración (lee variables del archivo .env).
     config = config_class or get_config()
     app.config.from_object(config)
-    app.logger.warning(f"FLASK_ENV activo: {app.config.get('ENV', 'no-env')}")
+    app.logger.warning(f"FLASK_ENV real: {os.getenv('FLASK_ENV', 'no-env')}")
     app.logger.warning(f"DB host: {app.config['DB_CONFIG'].get('host')}")
     app.logger.warning(f"DB port: {app.config['DB_CONFIG'].get('port')}")
     app.logger.warning(f"DB user: {app.config['DB_CONFIG'].get('user')}")
