@@ -41,14 +41,15 @@ class Config:
     # Los valores se leen del .env. Si falta alguno, se usa un default seguro
     # para desarrollo con XAMPP (root sin contraseña).
     DB_CONFIG = {
-        "host": os.getenv("DB_HOST", "localhost"),
-        "port": int(os.getenv("DB_PORT", 3306)),
-        "user": os.getenv("DB_USER", "root"),
-        "password": os.getenv("DB_PASSWORD", ""),
-        "database": os.getenv("DB_NAME", "milagros_beauty_vr7"),
-        # Charset explícito para soportar tildes y emojis (Milagro's Beauty✨)
-        "charset": "utf8mb4",
-        "use_unicode": True,
+    "host": os.getenv("DB_HOST", "localhost"),
+    "port": int(os.getenv("DB_PORT", 3306)),
+    "user": os.getenv("DB_USER", "root"),
+    "password": os.getenv("DB_PASSWORD", ""),
+    "database": os.getenv("DB_NAME", "milagros_beauty_vr7"),
+    "charset": "utf8mb4",
+    "use_unicode": True,
+    "ssl_disabled": True,
+    "connection_timeout": 10,
     }
 
     # --- Configuración de hashing bcrypt -----------------------------------

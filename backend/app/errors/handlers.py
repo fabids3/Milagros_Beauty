@@ -51,24 +51,29 @@ def registrar_handlers(app):
             return render_template("mantenimiento.html"), err.status_code
         return jsonify(err.to_dict()), err.status_code
 
-    # --- Errores HTTP estándar de Flask -----------------------------------
+# --- Errores HTTP estándar de Flask -----------------------------------
     @app.errorhandler(404)
     def manejar_404(_err):
         if _es_peticion_api(request):
             return jsonify({"error": "Recurso no encontrado"}), 404
         return render_template("mantenimiento.html"), 404
 
+
     @app.errorhandler(405)
     def manejar_405(_err):
         return jsonify({"error": "Método HTTP no permitido"}), 405
 
+
     @app.errorhandler(500)
-    def manejar_500(_err):
+    def manejar_500(err):
+        app.logger.exception("Error HTTP 500 capturado", exc_info=err)
+
         if _es_peticion_api(request):
             return jsonify({"error": "Error interno del servidor"}), 500
         return render_template("mantenimiento.html"), 500
 
-    # --- Cualquier otra excepción no controlada ---------------------------
+
+# --- Cualquier otra excepción no controlada ---------------------------
     @app.errorhandler(Exception)
     def manejar_excepcion_no_controlada(err: Exception):
         """
@@ -76,9 +81,12 @@ def registrar_handlers(app):
         de la base de datos) acaba aquí. Se muestra mantenimiento.html
         para cumplir el requerimiento académico.
         """
+        app.logger.exception("Excepción no controlada en la aplicación")
+
         # En modo debug, dejamos que Flask muestre el traceback completo.
         if app.config.get("DEBUG"):
             raise err
+
         if _es_peticion_api(request):
             return jsonify({"error": "Error interno del servidor"}), 500
         return render_template("mantenimiento.html"), 500
