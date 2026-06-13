@@ -50,6 +50,7 @@ class Config:
     "use_unicode": True,
     "ssl_disabled": True,
     "connection_timeout": 10,
+    "auth_plugin": "mysql_native_password",
     }
 
     # --- Configuración de hashing bcrypt -----------------------------------
