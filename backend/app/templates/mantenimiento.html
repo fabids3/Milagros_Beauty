@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En Mantenimiento - Milagro's Beauty</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .mantenimiento-container {
+            text-align: center;
+            padding: 80px 20px;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .mantenimiento-icon {
+            font-size: 6rem;
+            margin-bottom: 20px;
+        }
+        .mantenimiento-container h1 {
+            color: #e84c7f;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .mantenimiento-container p {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <h1 class="logo">Milagro's<span>Beauty</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mantenimiento-container">
+        <div class="mantenimiento-icon">🛠️🌸</div>
+        <h1>¡Estamos embelleciendo nuestra tienda!</h1>
+        <p>En este momento nuestra base de datos está en mantenimiento para brindarte una experiencia más rápida y segura. Estaremos de vuelta muy pronto.</p>
+        <p><strong>¡Gracias por tu paciencia, hermosa!</strong></p>
+        
+        <button onclick="window.location.href='/'" class="btn">Reintentar Conexión</button>
+    </main>
+</body>
+</html>

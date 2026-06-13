@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admin - Milagro's Beauty</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Panel<span>Administrativo</span></h1>
+            <a href="/" class="btn">Ver Tienda</a>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 30px;">
+        <section class="admin-form-section">
+            <h2>Agregar Nuevo Producto</h2>
+            <form id="form-admin-producto" class="admin-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <input type="text" id="admin-nombre" placeholder="Nombre del producto" required>
+                    <input type="number" id="admin-precio" placeholder="Precio (sin puntos)" required>
+                    <input type="text" id="admin-contenido" placeholder="Contenido (ej. 450 ml, 1 unidad)" required>
+                    <input type="number" id="admin-stock" placeholder="Stock Inicial" required>
+                    
+                    <input type="text" id="admin-imagen" placeholder="Ruta: imagenes/nombre.jpg" required>
+                    <select id="admin-categoria" required>
+                        <option value="" disabled selected>Seleccione Categoría</option>
+                        <option value="1">Shampoos</option>
+                        <option value="2">Acondicionadores</option>
+                        <option value="3">Tratamientos</option>
+                        <option value="4">Mascarillas</option>
+                        <option value="5">Serums y Gotas</option>
+                        <option value="6">Perfumes Capilares</option>
+                        <option value="7">Accesorios</option>
+                    </select>
+                </div>
+
+                <textarea id="admin-desc" placeholder="Descripción general del producto" rows="2" required></textarea>
+                <textarea id="admin-ideal" placeholder="Ideal para... (Ej: Cabellos secos o maltratados)" rows="2" required></textarea>
+                <textarea id="admin-beneficios" placeholder="Beneficios principales" rows="2" required></textarea>
+                <textarea id="admin-ingredientes" placeholder="Ingredientes principales" rows="2" required></textarea>
+                <textarea id="admin-uso" placeholder="Modo de uso" rows="2" required></textarea>
+
+                <button type="submit" class="btn" style="width: 100%; margin-top: 15px;">Guardar Producto</button>
+            </form>
+        </section>
+
+        <hr style="margin: 40px 0; border: 1px solid #fce4ec;">
+
+        <section>
+            <h2>Inventario Actual (Base de Datos)</h2>
+            <table class="tabla-carrito">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-inventario">
+                </tbody>
+            </table>
+        </section>
+
+
+
+        <section style="margin-top: 50px;">
+            <h2>Registro de Ventas (Pedidos Realizados)</h2>
+            <table class="tabla-carrito">
+                <thead>
+                    <tr>
+                        <th>Pedido #</th>
+                        <th>Cliente</th>
+                        <th>Total</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-pedidos-admin">
+                </tbody>
+            </table>
+        </section>
+        
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+        
+
+    </main>
+
+    
+    <script src="{{ url_for('static', filename='_session_patch.js') }}"></script>
+    <script src="{{ url_for('static', filename='admin.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+# --- Variables sensibles ---
+.env
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.Python
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+
+# --- Sistema operativo ---
+.DS_Store
+Thumbs.db
+
+# --- Pruebas y cobertura ---
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Logs ---
+*.log
+logs/
+# --- Flask / instancia ---
+instance/
+
+# --- Build / distribución ---
+build/
+dist/
+
+# --- Archivos locales varios ---
+*.sqlite3
