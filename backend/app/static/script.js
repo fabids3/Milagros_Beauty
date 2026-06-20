@@ -197,7 +197,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 return; //  Detiene el proceso y no envía nada a la base de datos
             }
             // ------------------------------------------
-
+// Validar términos y condiciones
+if (!document.getElementById('check-terminos').checked) {
+    alert("Debes aceptar los términos y condiciones.");
+    return;
+}
             // Si la contraseña es fuerte, armamos los datos como siempre
             const datos = {
                 nombre: document.getElementById('register-nombre').value,
