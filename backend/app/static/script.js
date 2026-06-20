@@ -226,7 +226,35 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+// ============================================================
+// MODAL TÉRMINOS Y CONDICIONES
+// ============================================================
 
+const modalTerminos = document.getElementById('modal-terminos');
+const abrirTerminos = document.getElementById('abrir-terminos');
+const cerrarTerminos = document.getElementById('cerrar-terminos');
+const aceptarTerminos = document.getElementById('aceptar-terminos');
+const checkTerminos = document.getElementById('check-terminos');
+
+if (abrirTerminos) {
+    abrirTerminos.addEventListener('click', (e) => {
+        e.preventDefault();
+        modalTerminos.style.display = 'flex';
+    });
+}
+
+if (cerrarTerminos) {
+    cerrarTerminos.addEventListener('click', () => {
+        modalTerminos.style.display = 'none';
+    });
+}
+
+if (aceptarTerminos) {
+    aceptarTerminos.addEventListener('click', () => {
+        checkTerminos.checked = true;
+        modalTerminos.style.display = 'none';
+    });
+}
     // === 6. AGREGAR AL CARRITO (Local) ===
     document.getElementById('contenedor-productos')?.addEventListener('click', (e) => {
         if (e.target.classList.contains('btn-agregar')) {
