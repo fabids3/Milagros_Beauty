@@ -70,7 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+// --- GUARDAR TÉRMINOS ---
+const btnGuardarTerminos = document.getElementById('btn-guardar-terminos');
 
+if (btnGuardarTerminos) {
+    btnGuardarTerminos.addEventListener('click', guardarTerminos);
+}
     // --- 4. ESCUCHADOR CREAR PRODUCTOS ---
     const formProducto = document.getElementById('form-admin-producto');
     if (formProducto) {
