@@ -61,26 +61,85 @@ def cambiar_rol(id_usuario: int):
         "user": usuario.to_dict(),
     }), 200
 
-@app.route('/superadmin/actualizar-terminos', methods=['PUT'])
+from flask import Blueprint, jsonify, request
+from database import conectar_db
+
+superadmin_bp = Blueprint('superadmin', __name__)
+
+# =====================================================
+# OBTENER TÉRMINOS Y CONDICIONES
+# =====================================================
+
+@superadmin_bp.route('/configuracion/terminos', methods=['GET'])
+def obtener_terminos():
+
+    try:
+
+        conexion = conectar_db()
+        cursor = conexion.cursor(dictionary=True)
+
+        cursor.execute("""
+            SELECT terminos
+            FROM configuracion
+            WHERE id_config = 1
+        """)
+
+        data = cursor.fetchone()
+
+        cursor.close()
+        conexion.close()
+
+        if data:
+            return jsonify(data)
+
+        return jsonify({
+            "terminos": ""
+        })
+
+    except Exception as e:
+
+        print("Error obteniendo términos:", e)
+
+        return jsonify({
+            "error": "No se pudieron cargar los términos"
+        }), 500
+
+
+# =====================================================
+# ACTUALIZAR TÉRMINOS Y CONDICIONES
+# =====================================================
+
+@superadmin_bp.route('/superadmin/actualizar-terminos', methods=['PUT'])
 def actualizar_terminos():
 
-    data = request.get_json()
-    nuevos_terminos = data.get('terminos')
+    try:
 
-    conexion = conectar_db()
-    cursor = conexion.cursor()
+        data = request.get_json()
 
-    cursor.execute("""
-        UPDATE configuracion
-        SET terminos = %s
-        WHERE id_config = 1
-    """, (nuevos_terminos,))
+        nuevos_terminos = data.get('terminos')
 
-    conexion.commit()
+        conexion = conectar_db()
+        cursor = conexion.cursor()
 
-    cursor.close()
-    conexion.close()
+        cursor.execute("""
+            UPDATE configuracion
+            SET terminos = %s
+            WHERE id_config = 1
+        """, (nuevos_terminos,))
 
-    return jsonify({
-        "mensaje": "Términos actualizados correctamente"
-    })
+        conexion.commit()
+
+        cursor.close()
+        conexion.close()
+
+        return jsonify({
+            "mensaje": "Términos actualizados correctamente"
+        })
+
+    except Exception as e:
+
+        print("Error actualizando términos:", e)
+
+        return jsonify({
+            "error": "No se pudieron actualizar los términos"
+        }), 500
