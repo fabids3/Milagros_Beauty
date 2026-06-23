@@ -60,3 +60,27 @@ def cambiar_rol(id_usuario: int):
         "mensaje": "Rol actualizado",
         "user": usuario.to_dict(),
     }), 200
+
+@app.route('/superadmin/actualizar-terminos', methods=['PUT'])
+def actualizar_terminos():
+
+    data = request.get_json()
+    nuevos_terminos = data.get('terminos')
+
+    conexion = conectar_db()
+    cursor = conexion.cursor()
+
+    cursor.execute("""
+        UPDATE configuracion
+        SET terminos = %s
+        WHERE id_config = 1
+    """, (nuevos_terminos,))
+
+    conexion.commit()
+
+    cursor.close()
+    conexion.close()
+
+    return jsonify({
+        "mensaje": "Términos actualizados correctamente"
+    })
