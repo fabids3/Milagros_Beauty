@@ -60,3 +60,22 @@ def cambiar_rol(id_usuario: int):
         "mensaje": "Rol actualizado",
         "user": usuario.to_dict(),
     }), 200
+
+@app.route('/configuracion/terminos')
+def obtener_terminos():
+
+    conexion = conectar_db()
+    cursor = conexion.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT terminos
+        FROM configuracion
+        WHERE id_config = 1
+    """)
+
+    data = cursor.fetchone()
+
+    cursor.close()
+    conexion.close()
+
+    return jsonify(data)
