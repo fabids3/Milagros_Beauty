@@ -239,3 +239,52 @@ window.editarProducto = async function(id, nombreActual, precioActual, stockActu
         } else { alert("Error al actualizar."); }
     } catch (error) { alert("Error de conexión."); }
 };
+// ======================================================
+// CARGAR TÉRMINOS
+// ======================================================
+async function cargarTerminos() {
+    try {
+        const res = await fetch(`${API_URL}/configuracion/terminos`);
+        const data = await res.json();
+
+        const textarea = document.getElementById('txt-terminos');
+
+        if (textarea) {
+            textarea.value = data.terminos || '';
+        }
+
+    } catch (error) {
+        console.error("Error cargando términos:", error);
+    }
+}
+
+
+// ======================================================
+// GUARDAR TÉRMINOS
+// ======================================================
+async function guardarTerminos() {
+
+    const textarea = document.getElementById('txt-terminos');
+
+    try {
+
+        const res = await fetch(`${API_URL}/configuracion/terminos`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                terminos: textarea.value
+            })
+        });
+
+        if (res.ok) {
+            alert("✅ Términos actualizados");
+        } else {
+            alert("❌ Error actualizando términos");
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
+}
