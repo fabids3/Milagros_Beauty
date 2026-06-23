@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarTablaClientes(usuario.id_usuario);
     cargarInventarioAdmin(); 
     cargarInfoEmpresa();
+    cargarTerminos();
 
     // --- 2. GESTIÓN DE MODERADORES ---
     const btnMostrarForm = document.getElementById('btn-mostrar-form-mod');
