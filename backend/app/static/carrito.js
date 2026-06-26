@@ -21,7 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const subtotal = item.precio * item.cantidad;
             total += subtotal;
 
-            const imagenSrc = item.imagen
+            const imagenSrc = (
+                item.imagen &&
+                item.imagen !== "None" &&
+                item.imagen !== "null"
+            )
                 ? (
                     item.imagen.startsWith('/static/')
                         ? item.imagen
@@ -29,7 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             ? `/static${item.imagen}`
                             : `/static/imagenes/${item.imagen}`
                 )
-                : '/static/imagenes/image_default.jpeg';
+                : "/static/imagenes/image_default.jpeg";
+        
             
             const tr = document.createElement("tr");
             tr.innerHTML = `
