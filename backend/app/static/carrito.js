@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     mensaje += `\n *Total: $${totalCompra.toLocaleString('es-CO')}*\n\n¡Quedo atento(a) para confirmar mi pedido! `;
 
                     // RECUERDA PONER TU NÚMERO AQUÍ (Con código de país, ej: 573000000000):
-                    const numeroTienda = "573246454318"; 
+                    const numeroTienda = "573232506137"; 
                     const url = `https://wa.me/${numeroTienda}?text=${encodeURIComponent(mensaje)}`;
                     
                     // Abrimos WhatsApp
