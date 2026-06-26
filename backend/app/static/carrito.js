@@ -201,12 +201,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     const numeroTienda = "573246454318"; 
                     const url = `https://wa.me/${numeroTienda}?text=${encodeURIComponent(mensaje)}`;
                     
-                    // Abrimos WhatsApp
-                    window.open(url, '_blank');
-
-                    // 3. Limpiamos carrito y enviamos al inicio
+                    // Limpiamos el carrito PRIMERO
                     localStorage.removeItem('carrito');
-                    window.location.href = "/";
+
+                    // Redirigimos directamente usando href en la misma pestaña. 
+                    // Esto fuerza al celular a abrir la app de WhatsApp de manera segura 
+                    // y evita el bloqueo por "await".
+                    window.location.replace(url);
+
                 } else {
                     const errorText = await response.text();
                     console.log("ERROR WHATSAPP:", errorText);
