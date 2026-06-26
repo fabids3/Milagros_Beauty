@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         data-id="${p.id_producto}" 
                         data-nombre="${p.nombre}" 
                         data-precio="${precioReal}" 
-                        data-imagen="${p.imagen}">
+                        data-imagen="${p.imagen ? p.imagen : '/static/imagenes/image_default.jpeg'}"
                         Agregar al Carrito
                     </button>
                 `;

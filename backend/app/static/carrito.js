@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const imagenSrc = (
                 item.imagen &&
                 item.imagen !== "None" &&
-                item.imagen !== "null"
+                item.imagen !== "null" &&
+                item.imagen !== ""
             )
                 ? (
                     item.imagen.startsWith('/static/')
@@ -40,7 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
             tr.innerHTML = `
                 <td>
                     <div style="display:flex; align-items:center; gap:10px;">
-                        <img src="${imagenSrc}" class="img-carrito" width="50">
+                        <img 
+                            src="${imagenSrc}" 
+                            class="img-carrito" 
+                            width="50"
+                            onerror="this.onerror=null; this.src='/static/imagenes/image_default.jpeg';"
+                        >
                         <span>${item.nombre}</span>
                     </div>
                 </td>
