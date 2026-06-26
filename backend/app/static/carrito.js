@@ -216,8 +216,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     localStorage.removeItem('carrito');
                     window.location.href = "/";
                 } else {
-                    const error = await response.json();
-                    alert("Hubo un problema en el servidor: " + (error.error || "Error desconocido"));
+                    const errorText = await response.text();
+                    console.log("ERROR WHATSAPP:", errorText);
+                    alert("Hubo un problema en el servidor");
+
                     btnWhatsapp.textContent = "💬 Finalizar Pedido por WhatsApp";
                     btnWhatsapp.disabled = false;
                 }
