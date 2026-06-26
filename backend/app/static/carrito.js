@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Ahora descuenta del stock real en la DB antes de sumar en el carrito
         if (target.classList.contains("btn-sumar")) {
             try {
-                const res = await fetch(`${API_URL}/descontarstock`, {
+                const res = await fetch(`${API_URL}/descontar_stock`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({ id: producto.id })
@@ -78,6 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     carrito[index].cantidad++;
                     actualizarTodo();
                 } else {
+                    const error = await res.text();
+                    console.log("ERROR BACKEND:", error); 
                     alert("¡Lo sentimos! No hay más unidades disponibles de este producto.");
                 }
             } catch (error) {
@@ -87,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // --- BOTÓN RESTAR (-) ---
         if (target.classList.contains("btn-restar")) {
-            await fetch(`${API_URL}/sumarstock`, {
+            await fetch(`${API_URL}/sumar_stock`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ id: producto.id, cantidad: 1 })
@@ -103,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // --- BOTÓN ELIMINAR (X) ---
         if (target.classList.contains("btn-eliminar")) {
-            await fetch(`${API_URL}/sumarstock`, {
+            await fetch(`${API_URL}/sumar_stock`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ id: producto.id, cantidad: producto.cantidad })
@@ -123,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!confirm("¿Vaciar todo el carrito?")) return;
 
         for (let prod of carrito) {
-            await fetch(`${API_URL}/sumarstock`, {
+            await fetch(`${API_URL}/sumar_stock`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ id: prod.id, cantidad: prod.cantidad })
