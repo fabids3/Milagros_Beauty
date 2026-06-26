@@ -3,6 +3,17 @@ let todosLosProductos = []; // Guardamos los productos aquí
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // === LÓGICA DEL MENÚ MÓVILES) ===
+        const btnMenuMovil = document.getElementById('btn-menu-movil');
+        const menuNav = document.querySelector('.nav ul');
+
+        if (btnMenuMovil && menuNav) {
+            btnMenuMovil.addEventListener('click', () => {
+                menuNav.classList.toggle('mostrar-menu');
+            });
+        }
+
+
     // === 1. LÓGICA DE VENTANAS MODALES (MOVIDO DESDE HTML) ===
     const loginLink = document.getElementById('login-link');
     const loginModal = document.getElementById('login-section-modal');

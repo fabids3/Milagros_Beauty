@@ -1173,60 +1173,69 @@ body {
 }
 
 
+
+/* === ESTILOS DEL BOTÓN MENÚ MÓVIL === */
+.menu-toggle {
+    display: none; /* Oculto en computadores */
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #e84c7f;
+    cursor: pointer;
+}
+
+
 @media (max-width: 768px) {
-  .header .container {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 15px;
-  }
+    .header .container {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        position: relative; /* Para poder ubicar el menú absoluto */
+    }
 
-  .search-container,
-  .nav,
-  .logo-container {
-    width: 100%;
-  }
+    /* Ubicamos el botón de las 3 rayitas arriba a la derecha */
+    .menu-toggle {
+        display: block; 
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
 
-  .nav ul {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 0;
-  }
+    /* El menú original se oculta y se vuelve desplegable */
+    .nav ul {
+        display: none; /* Oculto por defecto en celular */
+        flex-direction: column;
+        background: #fff;
+        width: 100%;
+        margin-top: 15px;
+        padding: 20px 0;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        gap: 15px;
+    }
 
-  .nav ul li {
-    width: 100%;
-    text-align: center;
-  }
+    /* Esta clase la activaremos con JavaScript */
+    .nav ul.mostrar-menu {
+        display: flex;
+    }
 
-  .hero-content h2 {
-    font-size: 28px;
-    line-height: 1.2;
-  }
+    .search-container {
+        width: 100%;
+        margin: 15px 0 0 0; /* Separa un poco el buscador */
+    }
 
-  .hero-content p {
-    font-size: 16px;
-  }
+    /* Arreglo para que las tablas no rompan el celular */
+    .carrito-wrapper, .super-panel, .admin-form-section {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 
-  .productos-grid,
-  .contacto-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  .container {
-    width: 100%;
-    padding: 0 15px;
-  }
-
-  .nosotros-content > div[style*="display: flex"] {
-    flex-direction: column !important;
-    gap: 20px !important;
-  }
-
-  .login-frame {
-    width: 90%;
-    max-width: 400px;
-  }
+    .hero-content h2 { font-size: 28px; line-height: 1.2; }
+    .hero-content p { font-size: 16px; }
+    .productos-grid, .contacto-grid { grid-template-columns: 1fr !important; }
+    .container { width: 100%; padding: 0 15px; }
+    .nosotros-content > div[style*="display: flex"] { flex-direction: column !important; gap: 20px !important; }
+    .login-frame { width: 90%; max-width: 400px; }
 }
 
 
