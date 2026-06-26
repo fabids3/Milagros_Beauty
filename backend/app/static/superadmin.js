@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarTablaClientes(usuario.id_usuario);
     cargarInventarioAdmin(); 
     cargarInfoEmpresa();
-    cargarTerminos();
 
     // --- 2. GESTIÓN DE MODERADORES ---
     const btnMostrarForm = document.getElementById('btn-mostrar-form-mod');
@@ -70,12 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-// --- GUARDAR TÉRMINOS ---
-const btnGuardarTerminos = document.getElementById('btn-guardar-terminos');
 
-if (btnGuardarTerminos) {
-    btnGuardarTerminos.addEventListener('click', guardarTerminos);
-}
     // --- 4. ESCUCHADOR CREAR PRODUCTOS ---
     const formProducto = document.getElementById('form-admin-producto');
     if (formProducto) {
@@ -245,52 +239,4 @@ window.editarProducto = async function(id, nombreActual, precioActual, stockActu
         } else { alert("Error al actualizar."); }
     } catch (error) { alert("Error de conexión."); }
 };
-// ======================================================
-// CARGAR TÉRMINOS
-// ======================================================
-async function cargarTerminos() {
-    try {
-        const res = await fetch(`${API_URL}/configuracion/terminos`);
-        const data = await res.json();
 
-        const textarea = document.getElementById('txt-terminos');
-
-        if (textarea) {
-            textarea.value = data.terminos || '';
-        }
-
-    } catch (error) {
-        console.error("Error cargando términos:", error);
-    }
-}
-
-
-// ======================================================
-// GUARDAR TÉRMINOS
-// ======================================================
-async function guardarTerminos() {
-
-    const textarea = document.getElementById('txt-terminos');
-
-    try {
-
-        const res = await fetch(`${API_URL}/configuracion/terminos`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                terminos: textarea.value
-            })
-        });
-
-        if (res.ok) {
-            alert("✅ Términos actualizados");
-        } else {
-            alert("❌ Error actualizando términos");
-        }
-
-    } catch (error) {
-        console.error(error);
-    }
-}

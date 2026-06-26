@@ -196,12 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("⚠️ Contraseña débil. Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo (ej: @, #, $, % o *).");
                 return; //  Detiene el proceso y no envía nada a la base de datos
             }
-            // ------------------------------------------
-// Validar términos y condiciones
-if (!document.getElementById('check-terminos').checked) {
-    alert("Debes aceptar los términos y condiciones.");
-    return;
-}
             // Si la contraseña es fuerte, armamos los datos como siempre
             const datos = {
                 nombre: document.getElementById('register-nombre').value,
@@ -230,35 +224,7 @@ if (!document.getElementById('check-terminos').checked) {
             }
         });
     }
-// ============================================================
-// MODAL TÉRMINOS Y CONDICIONES
-// ============================================================
 
-const modalTerminos = document.getElementById('modal-terminos');
-const abrirTerminos = document.getElementById('abrir-terminos');
-const cerrarTerminos = document.getElementById('cerrar-terminos');
-const aceptarTerminos = document.getElementById('aceptar-terminos');
-const checkTerminos = document.getElementById('check-terminos');
-
-if (abrirTerminos) {
-    abrirTerminos.addEventListener('click', (e) => {
-        e.preventDefault();
-        modalTerminos.style.display = 'flex';
-    });
-}
-
-if (cerrarTerminos) {
-    cerrarTerminos.addEventListener('click', () => {
-        modalTerminos.style.display = 'none';
-    });
-}
-
-if (aceptarTerminos) {
-    aceptarTerminos.addEventListener('click', () => {
-        checkTerminos.checked = true;
-        modalTerminos.style.display = 'none';
-    });
-}
     // === 6. AGREGAR AL CARRITO (Local) ===
     document.getElementById('contenedor-productos')?.addEventListener('click', (e) => {
         if (e.target.classList.contains('btn-agregar')) {
