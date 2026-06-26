@@ -283,6 +283,74 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+        // ============================================================
+    // LÓGICA DE LA VENTANA MODAL DE DETALLES DE PRODUCTO
+    // ============================================================
+    const contenedorProd = document.getElementById('contenedor-productos');
+    const modalProd = document.getElementById('modal-producto');
+    const cerrarModalProd = document.getElementById('cerrar-modal-prod');
+
+    if (contenedorProd && modalProd) {
+        // 1. Detectar clic en cualquier tarjeta del contenedor
+        contenedorProd.addEventListener('click', (e) => {
+            // Ignorar si se hizo clic específicamente en el botón de "Agregar al Carrito"
+            if (e.target.classList.contains('btn-agregar')) return;
+
+            // Buscar si el clic fue dentro de un div con la clase 'producto'
+            const tarjeta = e.target.closest('.producto');
+            
+            if (tarjeta) {
+                // Sacamos el ID del producto desde el botón interno
+                const id_producto = tarjeta.querySelector('.btn-agregar').getAttribute('data-id');
+                
+                // Buscamos toda la información de ese producto en tu memoria global
+                const p = todosLosProductos.find(prod => prod.id_producto == id_producto);
+                
+                if (p) {
+                    // Llenamos la ventana modal con los datos exactos de la base de datos
+                    document.getElementById('modal-prod-img').src = p.imagen ? `/static/${p.imagen}` : '/static/imagenes/image_default.jpeg';
+                    document.getElementById('modal-prod-titulo').textContent = p.nombre;
+                    document.getElementById('modal-prod-precio').textContent = `$${Number(p.precio).toLocaleString('es-CO')}`;
+                    
+                    // Evaluamos los campos para que si están vacíos no se vea mal
+                    document.getElementById('modal-prod-desc').textContent = p.descripcion || 'Sin información.';
+                    document.getElementById('modal-prod-ideal').textContent = p.ideal_para || 'Sin información.';
+                    document.getElementById('modal-prod-beneficios').textContent = p.beneficios || 'Sin información.';
+                    document.getElementById('modal-prod-ingredientes').textContent = p.ingredientes || 'Sin información.';
+                    document.getElementById('modal-prod-uso').textContent = p.modo_uso || 'Sin información.';
+                    
+                    // Mostramos el modal y bloqueamos el scroll del fondo
+                    modalProd.style.display = 'flex';
+                    document.body.style.overflow = 'hidden'; 
+                }
+            }
+        });
+
+        // 2. Cerrar el modal con el botón X
+        if (cerrarModalProd) {
+            cerrarModalProd.addEventListener('click', () => {
+                modalProd.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restaurar el scroll
+            });
+        }
+
+        // 3. Cerrar el modal si hacen clic en la parte oscura del fondo
+        modalProd.addEventListener('click', (e) => {
+            if (e.target === modalProd) {
+                modalProd.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+
+
+
+
+
+
+    
+
     // === 8. CARGAR TÍTULO TIENDA (Dinámico) ===
     async function cargarTituloTienda() {
         try {
