@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 document.title = data.titulo;
                 const logoText = document.querySelector('.logo');
-                if (logoText) logoText.innerHTML = `${data.titulo}<span>✨</span>`;
+                if (logoText) logoText.innerHTML = `${data.titulo}<span></span>`;
             }
         } catch (error) {
             console.error("Error al cargar el título de la tienda:", error);
