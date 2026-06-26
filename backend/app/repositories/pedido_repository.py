@@ -22,7 +22,7 @@ class PedidoRepository:
     def crear_pedido_completo(pedido: Pedido) -> int:
         """
         Crea el pedido + todas sus líneas en una sola transacción.
-        Calcula el subtotal de cada línea (cantidad * precio_unitario).
+        MySQL calcula automáticamente el subtotal de cada línea.
         Si algo falla, hace ROLLBACK completo.
         """
         conn = get_db()
@@ -38,22 +38,19 @@ class PedidoRepository:
             )
             id_pedido = cursor.lastrowid
 
-            # 2) Insertar cada línea con subtotal calculado
+            # 2) Insertar cada línea (subtotal lo calcula MySQL automáticamente)
             for linea in pedido.detalle:
-                subtotal = linea.cantidad * float(linea.precio_unitario)
                 cursor.execute(
                     """
                     INSERT INTO pedido_detalle
-                      (id_pedido, id_producto, cantidad,
-                       precio_unitario, subtotal)
-                    VALUES (%s, %s, %s, %s, %s)
+                    (id_pedido, id_producto, cantidad, precio_unitario)
+                    VALUES (%s, %s, %s, %s)
                     """,
                     (
                         id_pedido,
                         linea.id_producto,
                         linea.cantidad,
                         linea.precio_unitario,
-                        subtotal,
                     ),
                 )
 
