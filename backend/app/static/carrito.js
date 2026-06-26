@@ -197,8 +197,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     mensaje += `\n *Total: $${totalCompra.toLocaleString('es-CO')}*\n\n¡Quedo atento(a) para confirmar mi pedido! `;
 
-                    // RECUERDA PONER TU NÚMERO AQUÍ (Con código de país, ej: 573000000000):
-                    const numeroTienda = "573246454318"; 
+                    // NUEVO: Pedimos el número oficial al servidor justo antes de enviarlo
+                    let numeroTienda = "573246454318"; // Número de respaldo por si acaso
+                    try {
+                        const configRes = await fetch(`${API_URL}/configuracion/info`);
+                        if (configRes.ok) {
+                            const configData = await configRes.json();
+                            if (configData.whatsapp) numeroTienda = configData.whatsapp;
+                        }
+                    } catch (e) { console.log("Usando WhatsApp por defecto"); }
+
                     const url = `https://wa.me/${numeroTienda}?text=${encodeURIComponent(mensaje)}`;
                     
                     // Limpiamos el carrito PRIMERO
@@ -225,10 +233,5 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
-
-
-
-
 
 });

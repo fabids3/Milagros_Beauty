@@ -5,7 +5,8 @@
  Capa: Dominio (Model en MVC)
 --------------------------------------------------------------------------------
  Representa la configuración general de la tienda (singleton: una sola fila
- con id = 1). Almacena título, "Sobre nosotros", misión, visión y ubicación.
+ con id = 1). Almacena título, "Sobre nosotros", misión, visión y ubicación,
+ además de la información de contacto dinámico.
 ================================================================================
 """
 
@@ -21,6 +22,11 @@ class Configuracion:
     mision: Optional[str] = ""
     vision: Optional[str] = ""
     ubicacion: Optional[str] = ""
+    
+    # --- NUEVOS CAMPOS AGREGADOS ---
+    whatsapp: Optional[str] = "573246454318"
+    correo_contacto: Optional[str] = "soporte@milagrosbeauty.com"
+    instagram: Optional[str] = "https://instagram.com/tu_usuario"
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -29,4 +35,4 @@ class Configuracion:
     def from_row(cls, row: dict) -> "Configuracion":
         if row is None:
             return cls()
-        return cls(**{k: row.get(k) for k in cls.__dataclass_fields__})
+        return cls(**{k: row.get(k) for k in cls.__dataclass_fields__ if k in row})
