@@ -335,28 +335,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ============================================================
-    // LÓGICA DEL BUSCADOR EN TIEMPO REAL 
-    // ============================================================
-    const inputBuscador = document.getElementById('input-buscador');
-    
-    if (inputBuscador) {
-        inputBuscador.addEventListener('input', (e) => {
-            const textoBusqueda = e.target.value.toLowerCase(); // Lo que escribe el cliente
-            const tarjetasProductos = document.querySelectorAll('.producto'); // <-- ¡AQUÍ ESTABA EL ERROR!
+// LÓGICA DEL BUSCADOR EN TIEMPO REAL (BÚSQUEDA GLOBAL)
+// ============================================================
+const inputBuscador = document.getElementById('input-buscador');
+
+if (inputBuscador) {
+    inputBuscador.addEventListener('input', (e) => {
+        const textoBusqueda = e.target.value.toLowerCase().trim();
+        const contenedor = document.getElementById('contenedor-productos');
+        
+        if (!contenedor) return;
+
+        // Si el cliente borra lo que escribió, volvemos a cargar la vista principal
+        if (textoBusqueda === '') {
+            cargarProductos(null);
+            return;
+        }
+
+        // Buscamos en TODOS los productos de la base de datos (que ya están en memoria)
+        const resultados = todosLosProductos.filter(p => 
+            p.nombre.toLowerCase().includes(textoBusqueda) || 
+            (p.descripcion && p.descripcion.toLowerCase().includes(textoBusqueda))
+        );
+
+        // Limpiamos la pantalla actual
+        contenedor.innerHTML = '';
+
+        // Si no hay coincidencias, mostramos un mensaje amigable
+        if (resultados.length === 0) {
+            contenedor.innerHTML = '<p style="text-align: center; width: 100%; font-size: 1.2em; color: #888; padding: 40px;">No encontramos productos con ese nombre. 😢</p>';
+            return;
+        }
+
+        // Si hay resultados, dibujamos las tarjetas de los productos encontrados
+        resultados.forEach(p => {
+            const div = document.createElement('div');
+            div.className = 'producto';
+            const precioReal = Number(p.precio);
             
-            tarjetasProductos.forEach(tarjeta => {
-                // Leemos todo el texto de la tarjeta (título y precio)
-                const contenidoTarjeta = tarjeta.innerText.toLowerCase(); 
-                
-                // Si coincide con la búsqueda, se muestra. Si no, se oculta suavemente.
-                if (contenidoTarjeta.includes(textoBusqueda)) {
-                    tarjeta.style.display = ''; 
-                } else {
-                    tarjeta.style.display = 'none'; 
-                }
-            });
+            // Usamos la imagen real si existe, o la de por defecto
+            const imagenSrc = p.imagen ? `/static/${p.imagen}` : '/static/imagenes/image_default.jpeg';
+
+            div.innerHTML = `
+                <img src="${imagenSrc}" alt="${p.nombre}" onerror="this.src='/static/imagenes/image_default.jpeg'">
+                <h3>${p.nombre}</h3>
+                <p class="precio">$${precioReal.toLocaleString('es-CO')}</p>
+                <button class="btn-agregar" 
+                    data-id="${p.id_producto}" 
+                    data-nombre="${p.nombre}" 
+                    data-precio="${precioReal}" 
+                    data-imagen="${p.imagen}">
+                    Agregar al Carrito
+                </button>
+            `;
+            contenedor.appendChild(div);
         });
-    }
+    });
+}
 
 // ============================================================
     // Terminos y Condiciones
