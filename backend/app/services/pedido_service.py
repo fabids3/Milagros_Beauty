@@ -90,3 +90,17 @@ class PedidoService:
             "total": float(total),
             "items": len(lineas),
         }
+    
+
+
+
+
+    @staticmethod
+    def cambiar_estado(id_pedido: int, id_estado: int) -> dict:
+        """Cambia el estado validando que exista."""
+        # 1=Pendiente, 2=Enviado, 3=Entregado, 4=Cancelado
+        if id_estado not in [1, 2, 3, 4]:
+            raise DatosInvalidosError("Estado no reconocido")
+            
+        PedidoRepository.cambiar_estado(id_pedido, id_estado)
+        return {"id_pedido": id_pedido, "nuevo_estado": id_estado}

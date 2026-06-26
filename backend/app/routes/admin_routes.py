@@ -35,3 +35,13 @@ def crear_producto():
         "mensaje": "¡Producto creado con éxito!",
         "producto": producto.to_dict(),
     }), 201
+
+
+
+@admin_bp.route("/ventas/<int:id_pedido>/estado", methods=["PUT"])
+@requiere_rol("admin", "superadmin")
+def actualizar_estado_pedido(id_pedido: int):
+    """Permite cambiar el estado de un pedido."""
+    data = request.get_json(silent=True) or {}
+    resultado = PedidoService.cambiar_estado(id_pedido, int(data.get("id_estado", 1)))
+    return jsonify({"mensaje": "Estado del pedido actualizado", "data": resultado}), 200

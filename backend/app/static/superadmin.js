@@ -93,11 +93,38 @@ async function cargarVentas() {
                 <td>${v.nombre} ${v.apellido}</td>
                 <td>${new Date(v.fecha_pedido).toLocaleString('es-CO')}</td>
                 <td style="color:#4CAF50; font-weight:bold;">$${Number(v.total).toLocaleString('es-CO')}</td>
-                <td><span style="background:#ffebee; color:#e84c7f; padding:5px 10px; border-radius:15px; font-size:12px; font-weight:bold;">${v.nombre_estado}</span></td>
+                <td>
+                    <select onchange="cambiarEstadoPedido(${v.id_pedido}, this.value)" 
+                            style="padding:5px; border-radius:5px; border:1px solid #ccc; outline:none; background:${v.id_estado === 3 ? '#e8f5e9' : '#fff'};">
+                        <option value="1" ${v.id_estado === 1 ? 'selected' : ''}>⏳ Pendiente</option>
+                        <option value="2" ${v.id_estado === 2 ? 'selected' : ''}>🚚 Enviado</option>
+                        <option value="3" ${v.id_estado === 3 ? 'selected' : ''}>✅ Entregado</option>
+                        <option value="4" ${v.id_estado === 4 ? 'selected' : ''}>❌ Cancelado</option>
+                    </select>
+                </td>
             </tr>
         `).join('');
     } catch (e) { console.error("Error ventas:", e); }
 }
+
+// Nueva función que se dispara al cambiar el menú desplegable
+window.cambiarEstadoPedido = async function(id_pedido, nuevo_estado) {
+    try {
+        const res = await fetch(`${API_URL}/admin/ventas/${id_pedido}/estado`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_estado: parseInt(nuevo_estado) })
+        });
+        if (res.ok) {
+            console.log(`Pedido #${id_pedido} actualizado.`);
+        } else {
+            alert("No se pudo actualizar el estado del pedido.");
+            cargarVentas(); // Recargamos para revertir el error visual
+        }
+    } catch (error) {
+        alert("Error de conexión al cambiar estado.");
+    }
+};
 
 async function cargarTablaClientes(idAdmin) {
     const tbody = document.getElementById('tabla-clientes');

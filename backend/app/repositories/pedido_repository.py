@@ -93,3 +93,16 @@ class PedidoRepository:
                 if v.get("fecha_pedido") is not None:
                     v["fecha_pedido"] = v["fecha_pedido"].isoformat()
             return ventas
+        
+
+
+
+    @staticmethod
+    def cambiar_estado(id_pedido: int, id_estado: int) -> bool:
+        """Actualiza el estado de un pedido en la base de datos."""
+        with db_cursor(commit=True) as cursor:
+            cursor.execute(
+                "UPDATE pedidos SET id_estado = %s WHERE id_pedido = %s",
+                (id_estado, id_pedido)
+            )
+            return cursor.rowcount > 0
