@@ -153,11 +153,18 @@ function cargarInfoEmpresa() {
 // ============================================================
 
 async function cargarInventarioAdmin() {
-    const tabla = document.getElementById('tabla-inventario');
-    if (!tabla) return;
     try {
         const res = await fetch(`${API_URL}/productos`);
         const productos = await res.json();
+        const tabla = document.getElementById('tabla-inventario');
+
+        if (!tabla) return;
+
+        if (productos.length === 0) {
+            tabla.innerHTML = '<tr><td colspan="5" style="text-align:center;">No hay productos en la base de datos.</td></tr>';
+            return;
+        }
+
         tabla.innerHTML = productos.map(p => `
             <tr>
                 <td>${p.id_producto}</td>
@@ -172,7 +179,9 @@ async function cargarInventarioAdmin() {
                 </td>
             </tr>
         `).join('');
-    } catch (error) { console.error("Error al cargar inventario:", error); }
+    } catch (error) {
+        console.error("Error al cargar inventario:", error);
+    }
 }
 
 async function guardarNuevoProducto(e) {
