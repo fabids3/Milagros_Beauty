@@ -196,6 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("⚠️ Contraseña débil. Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo (ej: @, #, $, % o *).");
                 return; //  Detiene el proceso y no envía nada a la base de datos
             }
+            // ------------------------------------------
+
             // Si la contraseña es fuerte, armamos los datos como siempre
             const datos = {
                 nombre: document.getElementById('register-nombre').value,
@@ -356,11 +358,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 }); // Fin del DOMContentLoaded
-
-
-
-
-
-
-
-

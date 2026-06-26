@@ -60,8 +60,3 @@ def cambiar_rol(id_usuario: int):
         "mensaje": "Rol actualizado",
         "user": usuario.to_dict(),
     }), 200
-
-from flask import Blueprint, jsonify, request
-from database import conectar_db
-
-superadmin_bp = Blueprint('superadmin', __name__)

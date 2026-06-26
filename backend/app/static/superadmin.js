@@ -239,4 +239,3 @@ window.editarProducto = async function(id, nombreActual, precioActual, stockActu
         } else { alert("Error al actualizar."); }
     } catch (error) { alert("Error de conexión."); }
 };
-
