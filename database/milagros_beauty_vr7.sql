@@ -92,7 +92,7 @@ CREATE TABLE `configuracion` (
 -- Se resolvió el conflicto de merge del dump original conservando la versión
 -- con el nombre visual `Milagro's Beauty✨`.
 INSERT INTO `configuracion` (`id`, `titulo`, `sobre_nosotros`, `mision`, `vision`, `ubicacion`) VALUES
-(1, 'Milagro\'s Beauty✨', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Ubicación física: Calle de Ejemplo #123, Ciudad');
+(1, 'Milagro\'s Beauty', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'Ubicación física: Calle de Ejemplo #123, Ciudad');
 
 -- --------------------------------------------------------
 --

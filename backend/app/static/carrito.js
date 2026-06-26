@@ -21,12 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const subtotal = item.precio * item.cantidad;
             total += subtotal;
 
-            const imagenSrc = (
-                item.imagen &&
-                item.imagen !== "None" &&
-                item.imagen !== "null" &&
-                item.imagen !== ""
-            )
+            const imagenSrc = item.imagen
                 ? (
                     item.imagen.startsWith('/static/')
                         ? item.imagen
@@ -34,19 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
                             ? `/static${item.imagen}`
                             : `/static/imagenes/${item.imagen}`
                 )
-                : "/static/imagenes/image_default.jpeg";
-        
+                : '/static/imagenes/image_default.jpeg';
             
             const tr = document.createElement("tr");
             tr.innerHTML = `
                 <td>
                     <div style="display:flex; align-items:center; gap:10px;">
-                        <img 
-                            src="${imagenSrc}" 
-                            class="img-carrito" 
-                            width="50"
-                            onerror="this.onerror=null; this.src='/static/imagenes/image_default.jpeg';"
-                        >
+                        <img src="${imagenSrc}" class="img-carrito" width="50">
                         <span>${item.nombre}</span>
                     </div>
                 </td>
@@ -245,10 +234,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
-
-
-
-
-
-
-

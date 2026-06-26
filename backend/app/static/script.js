@@ -54,14 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             if (todosLosProductos.length === 0) {
                 const response = await fetch(`${API_URL}/productos`);
-
                 // Detector de caída: si MySQL está apagado
                 if (!response.ok) {
                     console.error("Base de datos fuera de línea.");
                     window.location.href = "/mantenimiento";
                     return;
                 }
-
                 todosLosProductos = await response.json();
             }
 
@@ -71,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (idCategoria === null || idCategoria === "0") {
                 // Modo Inicio: 2 de cada categoría
                 const categoriasUnicas = [...new Set(todosLosProductos.map(p => p.id_categoria))];
-
                 categoriasUnicas.forEach(catId => {
                     const prodsDeCat = todosLosProductos.filter(p => p.id_categoria === catId);
                     productosAMostrar = productosAMostrar.concat(prodsDeCat.slice(0, 2));
@@ -86,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const div = document.createElement('div');
                 div.className = 'producto';
                 const precioReal = Number(p.precio);
-
                 div.innerHTML = `
                     <img src="/static/imagenes/image_default.jpeg" alt="${p.nombre}">
                     <h3>${p.nombre}</h3>
@@ -99,10 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         Agregar al Carrito
                     </button>
                 `;
-
                 contenedor.appendChild(div);
             });
-
         } catch (error) {
             // Detector de caída total: si Flask está apagado
             console.error("Error crítico de conexión:", error);
