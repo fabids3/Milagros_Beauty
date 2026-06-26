@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (p) {
                     // Llenamos la ventana modal con los datos exactos de la base de datos
-                    document.getElementById('modal-prod-img').src = p.imagen ? `/static/${p.imagen}` : '/static/imagenes/image_default.jpeg';
+                    document.getElementById('modal-prod-img').src = '/static/imagenes/image_default.jpeg';
                     document.getElementById('modal-prod-titulo').textContent = p.nombre;
                     document.getElementById('modal-prod-precio').textContent = `$${Number(p.precio).toLocaleString('es-CO')}`;
                     
