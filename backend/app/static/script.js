@@ -363,7 +363,7 @@ if (inputBuscador) {
 
         // Si no hay coincidencias, mostramos un mensaje amigable
         if (resultados.length === 0) {
-            contenedor.innerHTML = '<p style="text-align: center; width: 100%; font-size: 1.2em; color: #888; padding: 40px;">No encontramos productos con ese nombre. 😢</p>';
+            contenedor.innerHTML = '<p style="text-align: center; width: 100%; font-size: 1.2em; color: #888; padding: 40px;">No encontramos productos relacionados con tu Busqueda. </p>';
             return;
         }
 
