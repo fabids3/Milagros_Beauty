@@ -5,11 +5,12 @@
  Capa: Presentación
 --------------------------------------------------------------------------------
  Endpoints:
-   GET  /productos              — catálogo visible.
-   PUT  /productos/<id>         — editar precio/stock (admin o superadmin).
-   POST /descontar_stock        — usado al finalizar compra.
-   POST /sumar_stock            — devolución de stock cuando se elimina del
-                                   carrito.
+   GET    /productos               — catálogo visible.
+   PUT    /productos/<id>          — editar precio/stock (admin o superadmin).
+   DELETE /productos/<id>          — eliminar un producto (admin o superadmin).
+   POST   /descontar_stock         — usado al finalizar compra.
+   POST   /sumar_stock             — devolución de stock cuando se elimina del
+                                     carrito.
 ================================================================================
 """
 
@@ -35,6 +36,14 @@ def editar_producto(id_producto: int):
         id_producto, request.get_json(silent=True) or {}
     )
     return jsonify({"mensaje": "Producto actualizado", "data": resultado}), 200
+
+
+@producto_bp.route("/productos/<int:id_producto>", methods=["DELETE"])
+@requiere_rol("admin", "superadmin")
+def eliminar_producto(id_producto: int):
+    """Elimina un producto por completo del catálogo. Protegido por rol."""
+    ProductoService.eliminar(id_producto)
+    return jsonify({"mensaje": "Producto eliminado exitosamente"}), 200
 
 
 @producto_bp.route("/descontar_stock", methods=["POST"])
