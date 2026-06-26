@@ -154,6 +154,9 @@ function cargarInfoEmpresa() {
             document.getElementById('info-mision').value = data.mision || '';
             document.getElementById('info-vision').value = data.vision || '';
             document.getElementById('info-ubicacion').value = data.ubicacion || '';
+            document.getElementById('info-whatsapp').value = data.whatsapp || '';
+            document.getElementById('info-correo').value = data.correo_contacto || '';
+            document.getElementById('info-instagram').value = data.instagram || '';
         });
 
     formInfo.addEventListener('submit', async (e) => {
@@ -162,7 +165,10 @@ function cargarInfoEmpresa() {
             sobre_nosotros: document.getElementById('info-sobre').value,
             mision: document.getElementById('info-mision').value,
             vision: document.getElementById('info-vision').value,
-            ubicacion: document.getElementById('info-ubicacion').value
+            ubicacion: document.getElementById('info-ubicacion').value,
+            whatsapp: document.getElementById('info-whatsapp').value,
+            correo_contacto: document.getElementById('info-correo').value,
+            instagram: document.getElementById('info-instagram').value
         };
         try {
             const response = await fetch(`${API_URL}/admin/configuracion/info`, {

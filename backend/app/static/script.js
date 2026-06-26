@@ -298,12 +298,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // === 9. CARGAR SOBRE NOSOTROS (Dinámico) ===
+    // === 9. CARGAR SOBRE NOSOTROS Y CONTACTO (Dinámico) ===
     async function cargarInfoEmpresa() {
         try {
             const response = await fetch(`${API_URL}/configuracion/info`);
             if (response.ok) {
                 const data = await response.json();
+                
+                // Textos de Nosotros
                 const elSobre = document.getElementById('txt-sobre');
                 const elMision = document.getElementById('txt-mision');
                 const elVision = document.getElementById('txt-vision');
@@ -313,6 +315,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(elMision) elMision.textContent = data.mision;
                 if(elVision) elVision.textContent = data.vision;
                 if(elUbicacion) elUbicacion.textContent = data.ubicacion;
+
+                // Enlaces de Contacto (Página Principal)
+                const linkWa = document.getElementById('link-whatsapp-tienda');
+                const linkCorreo = document.getElementById('link-correo-tienda');
+                const linkIg = document.getElementById('link-instagram-tienda');
+                const txtCorreo = document.getElementById('txt-correo-visible');
+
+                if (linkWa) linkWa.href = `https://wa.me/${data.whatsapp}`;
+                if (linkCorreo) linkCorreo.href = `mailto:${data.correo_contacto}`;
+                if (txtCorreo) txtCorreo.textContent = data.correo_contacto;
+                if (linkIg) linkIg.href = data.instagram;
             }
         } catch (error) {
             console.error("Error al cargar la información de la empresa:", error);

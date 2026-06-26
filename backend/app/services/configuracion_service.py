@@ -17,15 +17,7 @@ class ConfiguracionService:
         config = ConfiguracionRepository.obtener()
         return {"titulo": config.titulo or "Milagro's Beauty"}
 
-    @staticmethod
-    def obtener_info_empresa() -> dict:
-        config = ConfiguracionRepository.obtener()
-        return {
-            "sobre_nosotros": config.sobre_nosotros or "",
-            "mision": config.mision or "",
-            "vision": config.vision or "",
-            "ubicacion": config.ubicacion or "",
-        }
+    
 
     @staticmethod
     def actualizar_titulo(titulo: str) -> None:
@@ -34,10 +26,26 @@ class ConfiguracionService:
         ConfiguracionRepository.actualizar_titulo(titulo.strip())
 
     @staticmethod
+    def obtener_info_empresa() -> dict:
+        config = ConfiguracionRepository.obtener()
+        return {
+            "sobre_nosotros": config.sobre_nosotros or "",
+            "mision": config.mision or "",
+            "vision": config.vision or "",
+            "ubicacion": config.ubicacion or "",
+            "whatsapp": getattr(config, 'whatsapp', '573246454318'),
+            "correo_contacto": getattr(config, 'correo_contacto', 'soporte@milagrosbeauty.com'),
+            "instagram": getattr(config, 'instagram', 'https://instagram.com/tu_usuario')
+        }
+
+    @staticmethod
     def actualizar_info_empresa(data: dict) -> None:
         ConfiguracionRepository.actualizar_info(
             sobre_nosotros=data.get("sobre_nosotros", ""),
             mision=data.get("mision", ""),
             vision=data.get("vision", ""),
             ubicacion=data.get("ubicacion", ""),
+            whatsapp=data.get("whatsapp", "573246454318"),
+            correo_contacto=data.get("correo_contacto", "soporte@milagrosbeauty.com"),
+            instagram=data.get("instagram", "https://instagram.com/tu_usuario")
         )

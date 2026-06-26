@@ -39,19 +39,16 @@ class ConfiguracionRepository:
             return cursor.rowcount > 0
 
     @staticmethod
-    def actualizar_info(
-        sobre_nosotros: str, mision: str, vision: str, ubicacion: str
-    ) -> bool:
+    def actualizar_info(sobre_nosotros: str, mision: str, vision: str, ubicacion: str, whatsapp: str, correo_contacto: str, instagram: str) -> bool:
+        from app.database import db_cursor
         with db_cursor(commit=True) as cursor:
             cursor.execute(
                 """
-                UPDATE configuracion
-                SET sobre_nosotros = %s,
-                    mision         = %s,
-                    vision         = %s,
-                    ubicacion      = %s
-                WHERE id = %s
+                UPDATE configuracion 
+                SET sobre_nosotros = %s, mision = %s, vision = %s, ubicacion = %s,
+                    whatsapp = %s, correo_contacto = %s, instagram = %s
+                WHERE id = 1
                 """,
-                (sobre_nosotros, mision, vision, ubicacion, SINGLETON_ID),
+                (sobre_nosotros, mision, vision, ubicacion, whatsapp, correo_contacto, instagram)
             )
             return cursor.rowcount > 0
