@@ -35,4 +35,4 @@ class Configuracion:
     def from_row(cls, row: dict) -> "Configuracion":
         if row is None:
             return cls()
-        return cls(**{k: row.get(k) for k in cls.__dataclass_fields__ if k in row})
+        return cls(**{k: row.get(k) for k in cls.__dataclass_fields__ if k in row}) 
