@@ -176,8 +176,16 @@ function cargarInfoEmpresa() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(datosInfo)
             });
-            if (response.ok) alert("¡Información guardada correctamente!");
-        } catch (error) { alert("Error al conectar."); }
+            if (response.ok) {
+                alert("¡Información guardada correctamente!");
+                // AQUÍ ESTÁ EL CAMBIO: Volvemos a cargar los datos para confirmar
+                cargarInfoEmpresa(); 
+            } else {
+                alert("Error al guardar en la base de datos.");
+            }
+        } catch (error) { 
+            alert("Error de conexión."); 
+        }
     });
 }
 
