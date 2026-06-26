@@ -175,10 +175,51 @@
                 <div class="form-group"><label>Teléfono</label><input type="tel" id="register-telefono" required></div>
                 <div class="form-group"><label>Correo Electrónico</label><input type="email" id="register-email" required></div>
                 <div class="form-group"><label>Contraseña</label><input type="password" id="register-pass" required></div>
+                <div class="terminos-container">
+                    <input type="checkbox" id="acepta-terminos" required>
+                    <label for="acepta-terminos">
+                        Acepto los 
+                        <a href="#" id="abrir-terminos">Términos y Condiciones</a>
+                    </label>
+                </div>
+
+
+
                 <button type="submit" class="login-btn">Crear mi Cuenta</button>
             </form>
         </div>
     </section>
+
+    <div id="modal-terminos" class="modal-terminos">
+        <div class="contenido-terminos">
+            <button type="button" id="cerrar-terminos">&times;</button>
+
+            <h2>Términos y Condiciones</h2>
+
+            <p>
+                Bienvenido(a) a Milagro's Beauty. Al registrarte en nuestra tienda,
+                aceptas nuestros términos y condiciones de uso.
+            </p>
+
+            <p>
+                La información suministrada debe ser verídica y actualizada.
+                Milagro's Beauty no se hace responsable por errores causados
+                por datos incorrectos proporcionados por el usuario.
+            </p>
+
+            <p>
+                Todos los pedidos están sujetos a disponibilidad de inventario.
+                Los precios pueden cambiar sin previo aviso.
+            </p>
+
+            <p>
+                Tus datos personales serán usados únicamente para procesar pedidos,
+                brindar soporte y mejorar tu experiencia de compra.
+            </p>
+        </div>
+    </div>
+
+
 
     <script src="{{ url_for('static', filename='_session_patch.js') }}"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>

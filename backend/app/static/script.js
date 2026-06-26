@@ -187,6 +187,13 @@ document.addEventListener('DOMContentLoaded', () => {
         registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // --- NUEVO: VALIDAR TÉRMINOS Y CONDICIONES ---
+            const aceptaTerminos = document.getElementById('acepta-terminos');
+            if (!aceptaTerminos.checked) {
+                alert("Debes aceptar los términos y condiciones para registrarte.");
+                return;
+            }
+
             // --- 🔒 NUEVO: VALIDACIÓN DE CONTRASEÑA ---
             const passwordInput = document.getElementById('register-pass').value;
             // La regla exige: min 8 caracteres, 1 minúscula, 1 mayúscula, 1 número, 1 símbolo
@@ -194,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (!reglaPassword.test(passwordInput)) {
                 alert("⚠️ Contraseña débil. Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo (ej: @, #, $, % o *).");
-                return; //  Detiene el proceso y no envía nada a la base de datos
+                return; // Detiene el proceso y no envía nada a la base de datos
             }
             // ------------------------------------------
 
@@ -327,10 +334,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+// ============================================================
+    // Terminos y Condiciones
+    // ============================================================
 
 
+    const abrirTerminos = document.getElementById("abrir-terminos");
+    const modalTerminos = document.getElementById("modal-terminos");
+    const cerrarTerminos = document.getElementById("cerrar-terminos");
 
+    if (abrirTerminos) {
+        abrirTerminos.addEventListener("click", (e) => {
+            e.preventDefault();
+            modalTerminos.style.display = "flex";
+        });
+    }
 
+    if (cerrarTerminos) {
+        cerrarTerminos.addEventListener("click", () => {
+            modalTerminos.style.display = "none";
+        });
+    }
 
 
 
