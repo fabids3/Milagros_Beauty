@@ -78,6 +78,7 @@ class PedidoRepository:
                        u.apellido,
                        p.total,
                        p.fecha_pedido,
+                       p.id_estado,         # <--- ¡ESTA ES LA MAGIA!
                        e.nombre_estado
                 FROM pedidos p
                 JOIN usuarios u        ON p.id_usuario = u.id_usuario

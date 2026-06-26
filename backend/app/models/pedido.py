@@ -29,6 +29,11 @@ class PedidoDetalle:
                 data[k] = float(data[k])
         return data
 
+    @classmethod
+    def from_row(cls, row: dict) -> "PedidoDetalle":
+        if not row: return None
+        return cls(**{k: row.get(k) for k in cls.__dataclass_fields__ if k in row})
+
 
 @dataclass
 class Pedido:
@@ -49,3 +54,8 @@ class Pedido:
         data["detalle"] = [d.to_dict() if isinstance(d, PedidoDetalle)
                            else d for d in self.detalle]
         return data
+
+    @classmethod
+    def from_row(cls, row: dict) -> "Pedido":
+        if not row: return None
+        return cls(**{k: row.get(k) for k in cls.__dataclass_fields__ if k in row})
