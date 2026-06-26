@@ -91,3 +91,22 @@ class ProductoService:
         if cantidad <= 0:
             raise DatosInvalidosError("La cantidad debe ser positiva")
         ProductoRepository.sumar_stock(id_producto, cantidad)
+
+
+
+
+
+
+    @staticmethod
+    def eliminar(id_producto: int) -> None:
+        """Intenta borrar el producto. Si ya tiene ventas, lo oculta (baja lógica)."""
+        if ProductoRepository.obtener_por_id(id_producto) is None:
+            raise RecursoNoEncontradoError("Producto no encontrado")
+        
+        try:
+            # 1. Intentamos borrarlo de raíz (Eliminación física)
+            ProductoRepository.eliminar(id_producto)
+        except Exception:
+            # 2. Si la BD lo bloquea por estar en un historial de compras,
+            # lo ocultamos para que desaparezca del catálogo (Eliminación lógica).
+            ProductoRepository.cambiar_visibilidad(id_producto, False)

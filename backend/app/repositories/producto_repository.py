@@ -116,3 +116,17 @@ class ProductoRepository:
                 (1 if visible else 0, id_producto),
             )
             return cursor.rowcount > 0
+        
+
+
+
+
+    @staticmethod
+    def eliminar(id_producto: int) -> bool:
+        """Eliminación física del producto en la base de datos."""
+        with db_cursor(commit=True) as cursor:
+            cursor.execute(
+                "DELETE FROM productos WHERE id_producto = %s",
+                (id_producto,)
+            )
+            return cursor.rowcount > 0
